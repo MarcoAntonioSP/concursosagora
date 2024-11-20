@@ -11,6 +11,7 @@ import { Empty } from '@/components/Empty';
 import { GetServerSideProps } from 'next';
 import { client } from '@/lib/apollo';
 import { ListaPrevistos } from '@/components/previstos/ListaPrevistos';
+import Footer from '@/components/footer/Footer';
 
 // Query para posts
 const GET_ALL_POSTS = gql`
@@ -147,6 +148,7 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
           <Empty />
         )}
       </div>
+      <Footer />
     </>
   );
 }

@@ -33,18 +33,29 @@ export default function Footer() {
       </div>
       <div>
       <div className=''>
-          <h3>Destaques</h3>
-          <ul className='flex flex-col'  >
-            <li><a href="/home"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Home</a></li>
-            <li><a href="/sobre"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Sobre Nós</a></li>
-            <li><a href="/produtos"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Produtos</a></li>
-            <li><a href="/blog"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Blog</a></li>
-            <li><a href="/trabalhe-conosco"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Trabalhe Conosco</a></li>
+          <h3 className='font-bold text-blue-600 text-center'>Destaques</h3>
+          <ul className='flex flex-col font-bold text-blue-600 text-centerl'  >
+            <li><a href="/home"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Inicio</a></li>
+            <li><a href="/sobre"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Vagas Abertas</a></li>
+            <li><a href="/produtos"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Vagas Previstas</a></li>
+            <li><a href="/trabalhe-conosco"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Contato</a></li>
             <li><a href="/politica-de-privacidade"><span className="w-2.5 h-2.5 bg-yellow-500 rounded-full inline-block mr-2"></span> Política de Privacidade</a></li>
           </ul>
         </div>
       </div>
-      <div><h1>ksaldjaskldjakl</h1></div>
+      <div>
+      <div>
+          <h3>Contato</h3>
+          <p>Telefone: (15) 3359-1400</p>
+          <p>Email: <a href="mailto:contato@eripack.com.br">contato@eripack.com.br</a></p>
+        </div>
+
+        <div>
+          <h3>Endereço</h3>
+          <p>Sorocaba / SP</p>
+          <p>Av. Georg Schaeffer, 1150, Sorocaba - SP, CEP: 18087-175</p>
+        </div>
+      </div>
     </div>
   );
 }

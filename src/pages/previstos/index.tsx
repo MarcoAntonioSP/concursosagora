@@ -8,6 +8,7 @@ import { Header } from '@/components/Header';
 import { GetServerSideProps } from 'next';
 import { client } from '@/lib/apollo';
 import { ListaPrevistos } from '@/components/previstos/ListaPrevistos';
+import Footer from '@/components/footer/Footer';
 
 const GET_ALL_PREVISTOS = gql`
   query MyQuery {
@@ -100,6 +101,7 @@ export default function Previtos({ previstos }: AllPrevistos) {
         )}
         <ListaPrevistos previstos={previstos} />
       </div>
+      <Footer />
     </>
   );
 }
