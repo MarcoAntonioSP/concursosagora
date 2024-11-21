@@ -18,7 +18,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://wa.me" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5511919072390" target="_blank" rel="noopener noreferrer">
                 <Image className="m-1" src="/whatsapp.png" alt="WhatsApp" width={34} height={24} />
               </a>
             </li>
