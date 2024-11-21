@@ -121,13 +121,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
                 ),
               }}
             />
-
             {/* Exibição do conteúdo em formato simples */}
-            {previsto.contentPrevisto.text && (
-              <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1">
-                {previsto.contentPrevisto.text}
-              </p>
-            )}
           </div>
         </div>
       </div>
