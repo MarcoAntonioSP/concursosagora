@@ -23,7 +23,7 @@ export const ListaEmpregos: React.FC<ListaEmpregosProps> = ({ empregos }) => {
   return (
     <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
       {empregos.length > 0 ? (
-        empregos.slice(1).map((emprego) => (
+        empregos.slice(0).map((emprego) => (
           <CardEmprego
             key={emprego.id}
             title={emprego.titleemprego}

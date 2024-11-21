@@ -23,7 +23,7 @@ export const ListaPrevistos: React.FC<ListaPrevistosProps> = ({ previstos }) => 
   return (
     <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
       {previstos.length > 0 ? (
-        previstos.slice(1).map((previsto) => (
+        previstos.slice(0).map((previsto) => (
           <CardPrevisto
             key={previsto.id}
             title={previsto.titleprevisto}

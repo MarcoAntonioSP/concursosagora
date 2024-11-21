@@ -9,6 +9,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ElementNode } from '@graphcms/rich-text-types';
+import Footer from '@/components/footer/Footer';
 
 // Query para obter os dados do "emprego" por slug
 const GET_EMPREGOS = gql`
@@ -125,6 +126,7 @@ export default function Emprego({ emprego }: EmpregoProps) {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -213,13 +213,13 @@ export default function Home({
               <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Próximos Concursos
               </h1>
-              <ListaPrevistos previstos={previstos.slice(0, 4)} />
+              <ListaPrevistos previstos={previstos.slice(0, 3)} />
             </div>
             <div>
               <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Oportunidades de Emprego
               </h1>
-              <ListaEmpregos empregos={empregos.slice(0, 4)} />
+              <ListaEmpregos empregos={empregos.slice(0, 3)} />
             </div>
           </>
         ) : (

@@ -36,7 +36,7 @@ export default function Footer() {
             <li><a href="/abertos" className="hover:underline">Vagas Abertas</a></li>
             <li><a href="/previstos" className="hover:underline">Vagas Previstas</a></li>
             <li><a href="/empregos" className="hover:underline">Empregos</a></li>
-            <li><a href="/contato" className="hover:underline">contato</a></li>
+            <li><a href="/contato" className="hover:underline">Sobre Nós</a></li>
           </ul>
         </div>
         <div className="mb-6 md:mb-0 text-center md:text-left">

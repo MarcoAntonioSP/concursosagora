@@ -1,16 +1,16 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { gql } from '@apollo/client';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { gql } from "@apollo/client";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
-import { Header } from '@/components/Header';
-import { GetServerSideProps } from 'next';
-import { client } from '@/lib/apollo';
-import { ListaEmpregos } from '@/components/empregos/ListaEmpregos';
-import { CardEmprego } from '@/components/empregos/CardEmprego';
-import Footer from '@/components/footer/Footer';
+import { Header } from "@/components/Header";
+import { GetServerSideProps } from "next";
+import { client } from "@/lib/apollo";
+import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
+import { CardEmprego } from "@/components/empregos/CardEmprego";
+import Footer from "@/components/footer/Footer";
 
 const GET_ALL_EMPREGOS = gql`
   query GetAllEmpregos {
@@ -62,7 +62,10 @@ export default function Home({ empregos }: AllEmpregos) {
           Voltar
         </Link>
         <div>
-          <h1 className='text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-'> Oportunidades de Emprego</h1>
+          <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
+            {" "}
+            Oportunidades de Emprego
+          </h1>
         </div>
 
         {empregos.length > 0 && (
@@ -75,7 +78,7 @@ export default function Home({ empregos }: AllEmpregos) {
                 src={empregos[0].empregoCoverImage.url}
                 alt=""
                 fill={true}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: "cover" }}
               />
             </div>
             <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
@@ -100,7 +103,25 @@ export default function Home({ empregos }: AllEmpregos) {
             </div>
           </Link>
         )}
-        <ListaEmpregos empregos={empregos} />
+        <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+          {empregos.length > 0 ? (
+            empregos.slice(1, 1000).map((emprego) => (
+              <CardEmprego
+                key={emprego.id}
+                title={emprego.titleemprego}
+                subtitle={emprego.subtitlemprego}
+                createdAt={emprego.createdAt}
+                urlImage={
+                  emprego.empregoCoverImage?.url || "/path/to/default/image.jpg"
+                } // URL de imagem padrão
+                slug={emprego.slugemprego}
+                author={emprego.author.name}
+              />
+            ))
+          ) : (
+            <Empty />
+          )}
+        </div>
       </div>
       <Footer />
     </>

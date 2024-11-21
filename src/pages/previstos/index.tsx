@@ -9,6 +9,7 @@ import { GetServerSideProps } from 'next';
 import { client } from '@/lib/apollo';
 import { ListaPrevistos } from '@/components/previstos/ListaPrevistos';
 import Footer from '@/components/footer/Footer';
+import { CardPrevisto } from '@/components/previstos/CardPrevisto';
 
 const GET_ALL_PREVISTOS = gql`
   query MyQuery {
@@ -150,7 +151,23 @@ export default function Previtos({ previstos }: AllPrevistos) {
             </div>
           </Link>
         )}
-        <ListaPrevistos previstos={previstos} />
+            <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+      {previstos.length > 0 ? (
+        previstos.slice(1,1000).map((previsto) => (
+          <CardPrevisto
+            key={previsto.id}
+            title={previsto.titleprevisto}
+            subtitle={previsto.subtitleprevisto}
+            createdAt={previsto.createdAt}
+            urlImage={previsto.previstoCoverImage?.url || '/path/to/default/image.jpg'} // URL de imagem padrão
+            slug={previsto.slugprevisto}
+            author={previsto.author.name}
+          />
+        ))
+      ) : (
+        <Empty />
+      )}
+    </div>
       </div>
       <Footer />
     </>
