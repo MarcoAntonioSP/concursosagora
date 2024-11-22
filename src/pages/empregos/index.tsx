@@ -4,11 +4,10 @@ import Link from "next/link";
 import { gql } from "@apollo/client";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-
+import Empty from "@/components/Empty";
 import { Header } from "@/components/Header";
 import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
-import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
 import { CardEmprego } from "@/components/empregos/CardEmprego";
 import Footer from "@/components/footer/Footer";
 

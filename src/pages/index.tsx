@@ -4,16 +4,15 @@ import Link from "next/link";
 import { gql } from "@apollo/client";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-
 import { CardPost } from "@/components/postabertos/CardPost";
 import { Header } from "@/components/Header";
-import { Empty } from "@/components/Empty";
 import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import { ListaPrevistos } from "@/components/previstos/ListaPrevistos";
 import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
 import Previstos from "./abertos";
 import Footer from "@/components/footer/Footer";
+import Empty from "@/components/Empty";
 
 // Query para posts
 const GET_ALL_POSTS = gql`
@@ -223,7 +222,7 @@ export default function Home({
             </div>
           </>
         ) : (
-          <Empty />
+            <Empty />
         )}
       </div>
       <Footer />

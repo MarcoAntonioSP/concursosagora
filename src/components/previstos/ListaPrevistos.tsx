@@ -1,5 +1,5 @@
 import { CardPrevisto } from './CardPrevisto';
-import { Empty } from '../Empty';
+import Empty from "@/components/Empty";
 
 interface Previsto {
   id: string;

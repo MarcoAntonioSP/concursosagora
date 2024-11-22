@@ -7,7 +7,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { Header } from '@/components/Header';
 import { GetServerSideProps } from 'next';
 import { client } from '@/lib/apollo';
-import { ListaPrevistos } from '@/components/previstos/ListaPrevistos';
+import Empty from "@/components/Empty";
 import Footer from '@/components/footer/Footer';
 import { CardPrevisto } from '@/components/previstos/CardPrevisto';
 

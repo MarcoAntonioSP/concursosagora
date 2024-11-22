@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { format, isValid } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
+
 interface CardEmpregoProps {
   title: string;
   subtitle: string;

@@ -1,5 +1,5 @@
 import { CardEmprego } from './CardEmprego';
-import { Empty } from '../Empty';
+import Empty from "@/components/Empty";
 
 interface Emprego {
   id: string;
