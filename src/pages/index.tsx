@@ -13,6 +13,7 @@ import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
 import Previstos from "./abertos";
 import Footer from "@/components/footer/Footer";
 import Empty from "@/components/Empty";
+import FeaturedArticle from "@/components/FeaturedArticle/FeaturedArticle";
 
 // Query para posts
 const GET_ALL_POSTS = gql`
@@ -152,10 +153,11 @@ export default function Home({
         <meta property="og:site_name" content="BrasilConcursos" />
         <meta name="twitter:site" content="@brasilconcursos" />
       </Head>
-      <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
+      <div className="w-full max-w-[1120px] flex flex-col mx-auto  pb-6 px-4">
         <Header />
         {posts ? (
           <>
+            <FeaturedArticle />
             <Link
               href={`/aberto/${posts[0].slug}`}
               className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"

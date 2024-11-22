@@ -23,13 +23,13 @@ export const ListaEmpregos: React.FC<ListaEmpregosProps> = ({ empregos }) => {
   return (
     <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
       {empregos.length > 0 ? (
-        empregos.slice(0).map((emprego) => (
+        empregos.map((emprego) => (
           <CardEmprego
             key={emprego.id}
             title={emprego.titleemprego}
             subtitle={emprego.subtitlemprego}
             createdAt={emprego.createdAt}
-            urlImage={emprego.empregoCoverImage?.url || '/path/to/default/image.jpg'} // URL de imagem padrão
+            urlImage={emprego.empregoCoverImage?.url || '/path/to/default/image.jpg'}
             slug={emprego.slugemprego}
             author={emprego.author.name}
           />

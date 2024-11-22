@@ -2,12 +2,12 @@ import { Header } from '@/components/Header';
 import { gql } from '@apollo/client';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import Link from 'next/link';
 import { client } from '@/lib/apollo';
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { RichText } from "@graphcms/rich-text-react-renderer";
+import { RichText } from "@graphcms/rich-text-react-renderer";git
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from '@/components/footer/Footer';
 
@@ -103,16 +103,34 @@ export default function Post({ post }: PostProps) {
             <p className='text-zinc-600 text-sm'>{format(new Date(post.createdAt), "dd 'de' MMM 'de' yyyy", { locale: ptBR })}</p>
           </div>
 
-
           <div className='mt-4 sm:mt-8'>
             <RichText 
               content={post.content.json} 
               renderers={{
-                p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1'>{children}</p>
+                h1: ({ children }) => <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4'>{children}</h1>,
+                h2: ({ children }) => <h2 className='text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4'>{children}</h2>,
+                h3: ({ children }) => <h3 className='text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4'>{children}</h3>,
+                p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4'>{children}</p>,
+                ul: ({ children }) => <ul className='list-disc list-inside ml-4 mb-4'>{children}</ul>,
+                ol: ({ children }) => <ol className='list-decimal list-inside ml-4 mb-4'>{children}</ol>,
+                li: ({ children }) => <li className='text-zinc-600 text-sm sm:text-base'>{children}</li>,
+                blockquote: ({ children }) => <blockquote className='border-l-4 border-blue-500 pl-4 italic my-4'>{children}</blockquote>,
+                code: ({ children }) => <code className='bg-gray-200 rounded px-1 py-0.5'>{children}</code>,
+                img: (props: Partial<ImageProps>) => {
+                  const { src, alt = '' } = props;
+                  if (src) {
+                    return (
+                      <div className='my-4'>
+                        <Image src={src} alt={alt} width={800} height={450} className='rounded-lg' />
+                      </div>
+                    );
+                  }
+                  return <div />;
+                },
               }}
             />
           </div>
-{/* ------------------------------------------------------------------- */}
+
           {post.coverImage2 && post.coverImage2.url && (
             <div className='w-full h-full flex flex-col mt-8'>
               <div className='flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden'>
@@ -131,7 +149,26 @@ export default function Post({ post }: PostProps) {
               <RichText 
                 content={post.content2.json} 
                 renderers={{
-                  p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1'>{children}</p>
+                  h1: ({ children }) => <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4'>{children}</h1>,
+                  h2: ({ children }) => <h2 className='text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4'>{children}</h2>,
+                  h3: ({ children }) => <h3 className='text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4'>{children}</h3>,
+                  p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4'>{children}</p>,
+                  ul: ({ children }) => <ul className='list-disc list-inside ml-4 mb-4'>{children}</ul>,
+                  ol: ({ children }) => <ol className='list-decimal list-inside ml-4 mb-4'>{children}</ol>,
+                  li: ({ children }) => <li className='text-zinc-600 text-sm sm:text-base'>{children}</li>,
+                  blockquote: ({ children }) => <blockquote className='border-l-4 border-blue-500 pl-4 italic my-4'>{children}</blockquote>,
+                  code: ({ children }) => <code className='bg-gray-200 rounded px-1 py-0.5'>{children}</code>,
+                  img: (props: Partial<ImageProps>) => {
+                    const { src, alt = '' } = props;
+                    if (src) {
+                      return (
+                        <div className='my-4'>
+                          <Image src={src} alt={alt} width={800} height={450} className='rounded-lg' />
+                        </div>
+                      );
+                    }
+                    return <div />;
+                  },
                 }}
               />
             )}
@@ -154,7 +191,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       },
     });
 
-    // Verifique se data e data.post estão definidos
     if (!data || !data.post) {
       return {
         notFound: true,
@@ -168,7 +204,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       revalidate: 60 * 30, // 30 min
     };
   } catch (error) {
-    // Lidar com erros na requisição
     console.error("Error fetching post data:", error);
     return {
       notFound: true,

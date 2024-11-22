@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { format, isValid } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
-
 interface CardEmpregoProps {
   title: string;
   subtitle: string;
@@ -24,15 +23,16 @@ export function CardEmprego({ author, createdAt, subtitle, title, urlImage, slug
       <div className='flex w-full h-[200px] sm:h-[234px] relative rounded-2xl overflow-hidden'>
         <Image 
           src={urlImage}
-          alt=""
+          alt={title}
           fill={true}
           style={{ objectFit: "cover" }}
+          className="rounded-lg"
         />
       </div>
 
       <div className='flex w-full flex-1 flex-col justify-between gap-1 sm:gap-2'>
-        <h1 className='font-bold text-lg sm:text-xl text-blue-600 clamp-2'>{title}</h1>
-        <p className='text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm clamp-3'>{subtitle}</p>
+        <h1 className='font-bold text-lg sm:text-xl text-blue-600 line-clamp-2'>{title}</h1>
+        <p className='text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm line-clamp-3'>{subtitle}</p>
 
         <div>
           <p className='font-bold text-zinc-900 text-sm md:text-base'>{author}</p>
