@@ -1,15 +1,15 @@
-import { Header } from '@/components/Header';
-import { gql } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
-import Image, { ImageProps } from 'next/image';
-import Link from 'next/link';
-import { client } from '@/lib/apollo';
+import { Header } from "@/components/Header";
+import { gql } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
+import Image, { ImageProps } from "next/image";
+import Link from "next/link";
+import { client } from "@/lib/apollo";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { RichText } from "@graphcms/rich-text-react-renderer";git
+import { RichText } from "@graphcms/rich-text-react-renderer";
 import { ElementNode } from "@graphcms/rich-text-types";
-import Footer from '@/components/footer/Footer';
+import Footer from "@/components/footer/Footer";
 
 const GET_POST = gql`
   query GetPost($slugPost: String) {
@@ -72,20 +72,20 @@ export default function Post({ post }: PostProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className='w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4'>
+      <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Header />
 
         <Link
           href="/"
-          className='flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600'
+          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
         >
           Voltar
         </Link>
-        
-        <div className='w-full h-full flex flex-col mt-8'>
+
+        <div className="w-full h-full flex flex-col mt-8">
           {post.coverImage && post.coverImage.url && (
-            <div className='flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden'>
-              <Image 
+            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+              <Image
                 src={post.coverImage.url}
                 alt={post.title}
                 fill={true}
@@ -95,46 +95,95 @@ export default function Post({ post }: PostProps) {
           )}
         </div>
 
-        <div className='flex w-full flex-col mt-4 sm:mt-8'>
-          <h1 className='font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600'>{post.title}</h1>
-          <h2 className='mt-4 text-xl text-zinc-800'>{post.subtitle}</h2>
+        <div className="flex w-full flex-col mt-4 sm:mt-8">
+          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+            {post.title}
+          </h1>
+          <h2 className="mt-4 text-xl text-zinc-800">{post.subtitle}</h2>
           <div>
-            <p className='font-bold text-zinc-900'>{post.author.name}</p>
-            <p className='text-zinc-600 text-sm'>{format(new Date(post.createdAt), "dd 'de' MMM 'de' yyyy", { locale: ptBR })}</p>
+            <p className="font-bold text-zinc-900">{post.author.name}</p>
+            <p className="text-zinc-600 text-sm">
+              {format(new Date(post.createdAt), "dd 'de' MMM 'de' yyyy", {
+                locale: ptBR,
+              })}
+            </p>
           </div>
 
-          <div className='mt-4 sm:mt-8'>
-            <RichText 
-              content={post.content.json} 
+          <div className="mt-4 sm:mt-8">
+            <RichText
+              content={post.content.json}
               renderers={{
-                h1: ({ children }) => <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4'>{children}</h1>,
-                h2: ({ children }) => <h2 className='text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4'>{children}</h2>,
-                h3: ({ children }) => <h3 className='text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4'>{children}</h3>,
-                p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4'>{children}</p>,
-                ul: ({ children }) => <ul className='list-disc list-inside ml-4 mb-4'>{children}</ul>,
-                ol: ({ children }) => <ol className='list-decimal list-inside ml-4 mb-4'>{children}</ol>,
-                li: ({ children }) => <li className='text-zinc-600 text-sm sm:text-base'>{children}</li>,
-                blockquote: ({ children }) => <blockquote className='border-l-4 border-blue-500 pl-4 italic my-4'>{children}</blockquote>,
-                code: ({ children }) => <code className='bg-gray-200 rounded px-1 py-0.5'>{children}</code>,
+                h1: ({ children }) => (
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4">
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4">
+                    {children}
+                  </p>
+                ),
+                ul: ({ children }) => (
+                  <ul className="list-disc list-inside ml-4 mb-4">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal list-inside ml-4 mb-4">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="text-zinc-600 text-sm sm:text-base">
+                    {children}
+                  </li>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">
+                    {children}
+                  </blockquote>
+                ),
+                code: ({ children }) => (
+                  <code className="bg-gray-200 rounded px-1 py-0.5">
+                    {children}
+                  </code>
+                ),
                 img: (props: Partial<ImageProps>) => {
-                  const { src, alt = '' } = props;
-                  if (src) {
-                    return (
-                      <div className='my-4'>
-                        <Image src={src} alt={alt} width={800} height={450} className='rounded-lg' />
-                      </div>
-                    );
+                  const { src, alt = "" } = props;
+                  if (!src) {
+                    return <></>;  // Retorna um fragmento vazio em vez de null
                   }
-                  return <div />;
-                },
+                  return (
+                    <div className="my-4">
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={800}
+                        height={450}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  );
+                }
+                
               }}
             />
           </div>
 
           {post.coverImage2 && post.coverImage2.url && (
-            <div className='w-full h-full flex flex-col mt-8'>
-              <div className='flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden'>
-                <Image 
+            <div className="w-full h-full flex flex-col mt-8">
+              <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+                <Image
                   src={post.coverImage2.url}
                   alt={post.title}
                   fill={true}
@@ -144,31 +193,74 @@ export default function Post({ post }: PostProps) {
             </div>
           )}
 
-          <div className='mt-4 sm:mt-8'>
+          <div className="mt-4 sm:mt-8">
             {post.content2?.json && (
-              <RichText 
-                content={post.content2.json} 
+              <RichText
+                content={post.content2.json}
                 renderers={{
-                  h1: ({ children }) => <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4'>{children}</h1>,
-                  h2: ({ children }) => <h2 className='text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4'>{children}</h2>,
-                  h3: ({ children }) => <h3 className='text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4'>{children}</h3>,
-                  p: ({ children }) => <p className='text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4'>{children}</p>,
-                  ul: ({ children }) => <ul className='list-disc list-inside ml-4 mb-4'>{children}</ul>,
-                  ol: ({ children }) => <ol className='list-decimal list-inside ml-4 mb-4'>{children}</ol>,
-                  li: ({ children }) => <li className='text-zinc-600 text-sm sm:text-base'>{children}</li>,
-                  blockquote: ({ children }) => <blockquote className='border-l-4 border-blue-500 pl-4 italic my-4'>{children}</blockquote>,
-                  code: ({ children }) => <code className='bg-gray-200 rounded px-1 py-0.5'>{children}</code>,
+                  h1: ({ children }) => (
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4">
+                      {children}
+                    </h1>
+                  ),
+                  h2: ({ children }) => (
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4">
+                      {children}
+                    </h2>
+                  ),
+                  h3: ({ children }) => (
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                      {children}
+                    </h3>
+                  ),
+                  p: ({ children }) => (
+                    <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4">
+                      {children}
+                    </p>
+                  ),
+                  ul: ({ children }) => (
+                    <ul className="list-disc list-inside ml-4 mb-4">
+                      {children}
+                    </ul>
+                  ),
+                  ol: ({ children }) => (
+                    <ol className="list-decimal list-inside ml-4 mb-4">
+                      {children}
+                    </ol>
+                  ),
+                  li: ({ children }) => (
+                    <li className="text-zinc-600 text-sm sm:text-base">
+                      {children}
+                    </li>
+                  ),
+                  blockquote: ({ children }) => (
+                    <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">
+                      {children}
+                    </blockquote>
+                  ),
+                  code: ({ children }) => (
+                    <code className="bg-gray-200 rounded px-1 py-0.5">
+                      {children}
+                    </code>
+                  ),
                   img: (props: Partial<ImageProps>) => {
-                    const { src, alt = '' } = props;
-                    if (src) {
-                      return (
-                        <div className='my-4'>
-                          <Image src={src} alt={alt} width={800} height={450} className='rounded-lg' />
-                        </div>
-                      );
+                    const { src, alt = "" } = props;
+                    if (!src) {
+                      return <></>;  // Retorna um fragmento vazio em vez de null
                     }
-                    return <div />;
-                  },
+                    return (
+                      <div className="my-4">
+                        <Image
+                          src={src}
+                          alt={alt}
+                          width={800}
+                          height={450}
+                          className="rounded-lg"
+                        />
+                      </div>
+                    );
+                  }
+                  
                 }}
               />
             )}
@@ -203,8 +295,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       },
       revalidate: 60 * 30, // 30 min
     };
-  } catch (error) {
-    console.error("Error fetching post data:", error);
+  } catch (err) {
+    console.error(err);
     return {
       notFound: true,
     };
@@ -213,9 +305,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [
-      { params: { slug: 'como-desenvolver-um-blog-com-nextjs' }},
-    ],
-    fallback: 'blocking',
+    paths: [],
+    fallback: "blocking",
   };
 };

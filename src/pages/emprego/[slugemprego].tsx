@@ -4,9 +4,9 @@ import { client } from '@/lib/apollo';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { RichText } from '@graphcms/rich-text-react-renderer';
+import Image, { ImageProps } from "next/image";
 import { Header } from '@/components/Header';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ElementNode } from '@graphcms/rich-text-types';
 import Footer from '@/components/footer/Footer';
@@ -111,16 +111,72 @@ export default function Emprego({ emprego }: EmpregoProps) {
             </p>
           </div>
 
-          <div className="mt-4 sm:mt-8 prose prose-lg mx-auto">
-            {/* Exibição do conteúdo em formato rico */}
+          <div className="mt-4 sm:mt-8">
             <RichText
               content={emprego.contentEmprego.json}
               renderers={{
+                h1: ({ children }) => (
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4">
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-500 my-4">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                    {children}
+                  </h3>
+                ),
                 p: ({ children }) => (
-                  <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1">
+                  <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4">
                     {children}
                   </p>
                 ),
+                ul: ({ children }) => (
+                  <ul className="list-disc list-inside ml-4 mb-4">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal list-inside ml-4 mb-4">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="text-zinc-600 text-sm sm:text-base">
+                    {children}
+                  </li>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">
+                    {children}
+                  </blockquote>
+                ),
+                code: ({ children }) => (
+                  <code className="bg-gray-200 rounded px-1 py-0.5">
+                    {children}
+                  </code>
+                ),
+                img: (props: Partial<ImageProps>) => {
+                  const { src, alt = "" } = props;
+                  if (!src) {
+                    return <></>; // Retorna um fragmento vazio
+                  }
+                  return (
+                    <div className="my-4">
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={800}
+                        height={450}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  );
+                },
               }}
             />
           </div>
