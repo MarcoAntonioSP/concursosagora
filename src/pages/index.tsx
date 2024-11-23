@@ -10,7 +10,6 @@ import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import { ListaPrevistos } from "@/components/previstos/ListaPrevistos";
 import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
-import Previstos from "./abertos";
 import Footer from "@/components/footer/Footer";
 import Empty from "@/components/Empty";
 import FeaturedArticle from "@/components/FeaturedArticle/FeaturedArticle";
@@ -128,7 +127,7 @@ export default function Home({
     <>
       <Head>
         <title>BrasilConcursos | Concursos Públicos e Empregos no Brasil</title>
-        <meta name="description" content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais." />
+        <meta name="description" content="Encontre concursos públicos e vagas de emprego atualizados, com informações sobre editais, inscrições e muito mais. Mantenha-se informado com a BrasilConcursos!" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="concursos públicos, empregos, editais, inscrições, vagas, Brasil, oportunidades de emprego" />
 
@@ -193,9 +192,9 @@ export default function Home({
               </div>
             </Link>
             <div>
-              <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
-                Concursos Abertos
-              </h1>
+              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
+                Concursos Abertoss
+              </h2>
             </div>
             <div className="flex flex-col items-center sm:grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 mt-12">
               {posts.slice(1, 4).map((post) => (
@@ -211,15 +210,15 @@ export default function Home({
               ))}
             </div>
             <div>
-              <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
+              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Próximos Concursos
-              </h1>
+              </h2>
               <ListaPrevistos previstos={previstos.slice(0, 3)} />
             </div>
             <div>
-              <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
+              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Oportunidades de Emprego
-              </h1>
+              </h2>
               <ListaEmpregos empregos={empregos.slice(0, 3)} />
             </div>
           </>
