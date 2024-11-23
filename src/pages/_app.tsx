@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { Poppins } from '@next/font/google'
+import { Poppins } from "next/font/google"
 import { ApolloProvider } from "@apollo/client"
 import { client } from "@/lib/apollo"
 import '../styles/globals.css'
