@@ -13,6 +13,8 @@ import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
 import Footer from "@/components/footer/Footer";
 import Empty from "@/components/Empty";
 import FeaturedArticle from "@/components/FeaturedArticle/FeaturedArticle";
+import { ListaNoticias } from "@/components/noticias/ListaNoticias";
+import { ListaFederais } from "@/components/federais/ListaFederal";
 
 // Query para posts
 const GET_ALL_POSTS = gql`
@@ -70,6 +72,41 @@ const GET_ALL_EMPREGOS = gql`
   }
 `;
 
+const GET_ALL_NOTICIAS = gql`
+  query GetAllNoticias {
+    noticias(orderBy: updatedAt_DESC) {
+      id
+      slugnoticia
+      titlenoticia
+      subtitlenoticia
+      createdAt
+      noticiaCoverImage {
+        url
+      }
+      author {
+        name
+      }
+    }
+  }
+`;
+
+const GET_ALL_FEDERAIS = gql`
+  query GetAllFederais {
+    federais(orderBy: updatedAt_DESC) {
+      id
+      slugfederal
+      titlefederal
+      createdAt
+      federalCoverImage {
+        url
+      }
+      author {
+        name
+      }
+    }
+  }
+`;
+
 interface AllPosts {
   posts: {
     id: string;
@@ -117,12 +154,44 @@ interface AllEmpregos {
     };
   }[];
 }
+interface Noticia {
+  id: string;
+  slugnoticia: string;
+  titlenoticia: string;
+  subtitlenoticia: string;
+  createdAt: string;
+  noticiaCoverImage: {
+    url: string;
+  };
+  author: {
+    name: string;
+  };
+}
+
+interface AllFederais {
+  federais: {
+    id: string;
+    slugfederal: string;
+    subtitlefederal: string;
+    titlefederal: string;
+    createdAt: string;
+    federalCoverImage: {
+      url: string;
+    };
+    contentFederal: string;
+    author: {
+      name: string;
+    };
+  }[];
+}
 
 export default function Home({
   posts,
   previstos,
   empregos,
-}: AllPosts & AllPrevistos & AllEmpregos) {
+  noticias,
+  federais,
+}: AllPosts & AllPrevistos & AllEmpregos & AllNoticias & AllFederais) {
   return (
     <>
       <Head>
@@ -221,6 +290,18 @@ export default function Home({
               </h2>
               <ListaEmpregos empregos={empregos.slice(0, 3)} />
             </div>
+            <div>
+              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
+                Noticias
+              </h2>
+              <ListaNoticias noticias={noticias.slice(0 ,3)} />
+            </div>
+            <div>
+              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
+                Noticias
+              </h2>
+              <ListaFederais federais={federais.slice(0 ,3)} />
+            </div>
           </>
         ) : (
             <Empty />
@@ -239,12 +320,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data: empregosData } = await client.query({
     query: GET_ALL_EMPREGOS,
   });
+  const { data: noticiasData } = await client.query({
+    query: GET_ALL_NOTICIAS,
+  });
+  const { data: federaisData } = await client.query({
+    query: GET_ALL_FEDERAIS,
+  });
 
   return {
     props: {
       posts: postsData.posts,
       previstos: previstosData.previstos,
       empregos: empregosData.empregos,
+      noticias: noticiasData.noticias,
+      federais: federaisData.federais,
     },
   };
 };

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { format, isValid } from "date-fns";
+import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
 interface CardFederalProps {
@@ -20,8 +20,6 @@ export function CardFederal({
   urlImage,
   slug,
 }: CardFederalProps) {
-  const date = new Date(createdAt);
-
   return (
     <Link
       href={`/federal/${slug}`}
@@ -30,18 +28,17 @@ export function CardFederal({
       <div className="flex w-full h-[200px] sm:h-[234px] relative rounded-2xl overflow-hidden">
         <Image
           src={urlImage}
-          alt={title}
+          alt=""
           fill={true}
           style={{ objectFit: "cover" }}
-          className="rounded-lg"
         />
       </div>
 
       <div className="flex w-full flex-1 flex-col justify-between gap-1 sm:gap-2">
-        <h1 className="font-bold text-lg sm:text-xl text-blue-600 line-clamp-2">
+        <h1 className="font-bold text-lg sm:text-xl text-blue-600 clamp-2">
           {title}
         </h1>
-        <p className="text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm line-clamp-3">
+        <p className="text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm clamp-3">
           {subtitle}
         </p>
 
@@ -50,9 +47,9 @@ export function CardFederal({
             {author}
           </p>
           <p className="text-zinc-600 text-xs md:text-sm">
-            {isValid(date)
-              ? format(date, "dd 'de' MMM 'de' yyyy", { locale: ptBR })
-              : "Data inválida"}
+            {format(new Date(createdAt), "dd 'de' MMM 'de' yyyy", {
+              locale: ptBR,
+            })}
           </p>
         </div>
       </div>
