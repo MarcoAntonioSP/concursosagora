@@ -49,7 +49,7 @@ export default function Home({ federais }: AllFederais) {
   return (
     <>
       <Head>
-        <title>Brasil Federais</title>
+        <title>ConcursosAgora Federais</title>
         <meta name="description" content="Oportunidades Federais em destaque" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

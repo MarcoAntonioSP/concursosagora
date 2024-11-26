@@ -187,7 +187,6 @@ interface AllFederais {
   }[];
 }
 
-
 export default function Home({
   posts,
   previstos,
@@ -198,37 +197,90 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>BrasilConcursos | Concursos Públicos e Empregos no Brasil</title>
-        <meta name="description" content="Encontre concursos públicos e vagas de emprego atualizados, com informações sobre editais, inscrições e muito mais. Mantenha-se informado com a BrasilConcursos!" />
+        <title>ConcursosAgora | Concursos Públicos e Empregos no Brasil</title>
+        <meta
+          name="description"
+          content="Encontre concursos públicos e vagas de emprego atualizados, com informações sobre editais, inscrições e muito mais. Mantenha-se informado com a ConcursosAgora!"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="concursos públicos, empregos, editais, inscrições, vagas, Brasil, oportunidades de emprego" />
+        <meta
+          name="keywords"
+          content="concursos públicos, empregos, editais, inscrições, vagas, Brasil, oportunidades de emprego"
+        />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.brasilconcursos.com.br/" />
-        <meta property="og:title" content="BrasilConcursos | Concursos Públicos e Empregos no Brasil" />
-        <meta property="og:description" content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais." />
-        <meta property="og:image" content="https://www.brasilconcursos.com.br/images/og-image.jpg" />
+        <meta property="og:url" content="https://www.ConcursosAgora.com.br/" />
+        <meta
+          property="og:title"
+          content="ConcursosAgora | Concursos Públicos e Empregos no Brasil"
+        />
+        <meta
+          property="og:description"
+          content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais."
+        />
+        <meta
+          property="og:image"
+          content="https://www.concursoscgora.com.br/images/og-image.jpg"
+        />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.brasilconcursos.com.br/" />
-        <meta property="twitter:title" content="BrasilConcursos | Concursos Públicos e Empregos no Brasil" />
-        <meta property="twitter:description" content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais." />
-        <meta property="twitter:image" content="https://www.brasilconcursos.com.br/images/twitter-image.jpg" />
-        
+        <meta
+          property="twitter:url"
+          content="https://www.concursoscgora.com.br/"
+        />
+        <meta
+          property="twitter:title"
+          content="ConcursosAgora | Concursos Públicos e Empregos no Brasil"
+        />
+        <meta
+          property="twitter:description"
+          content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais."
+        />
+        <meta
+          property="twitter:image"
+          content="https://www.concursosagora.com.br/images/twitter-image.jpg"
+        />
+
         {/* Additional Meta Tags */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="BrasilConcursos" />
-        <link rel="canonical" href="https://www.brasilconcursos.com.br/" />
-        <meta property="og:site_name" content="BrasilConcursos" />
-        <meta name="twitter:site" content="@brasilconcursos" />
+        <meta name="author" content="ConcursosAgora" />
+        <link rel="canonical" href="https://www.concursosagora.com.br/" />
+        <meta property="og:site_name" content="ConcursosAgora" />
+        <meta name="twitter:site" content="@concursosagora" />
       </Head>
       <div className="w-full max-w-[1120px] flex flex-col mx-auto  pb-6 px-4">
         <Header />
         {posts ? (
           <>
-            <FeaturedArticle />
+            {/* Quero exibir somente o titulo  */}
+            {noticias.length > 0 && (
+              <Link
+                href={`/noticia/${noticias[0].slugnoticia}`}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full h-full p-4 sm:p-6 mt-12 hover:brightness-75 transition-all"
+              >
+                <div className="flex flex-1 flex-col gap-3 lg:gap-6 text-center sm:text-left">
+                  <h1 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-blue-600 line-clamp-2">
+                    {noticias[0].titlenoticia}
+                  </h1>
+                  <div>
+                    {/* Você pode adicionar mais conteúdo aqui se necessário */}
+                  </div>
+                </div>
+              </Link>
+            )}
+
+            <Link
+              href={`/aberto/${posts[0].slug}`}
+              className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+            >
+              <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
+                <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
+                  {posts[0].title}
+                </h1>
+              </div>
+            </Link>
             <Link
               href={`/aberto/${posts[0].slug}`}
               className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
@@ -297,17 +349,17 @@ export default function Home({
               <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Noticias
               </h2>
-              <ListaNoticias noticias={noticias.slice(0 ,3)} />
+              <ListaNoticias noticias={noticias.slice(0, 3)} />
             </div>
             <div>
               <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
                 Federais
               </h2>
-              <ListaFederais federais={federais.slice(0 ,3)} />
+              <ListaFederais federais={federais.slice(0, 3)} />
             </div>
           </>
         ) : (
-            <Empty />
+          <Empty />
         )}
       </div>
       <Footer />

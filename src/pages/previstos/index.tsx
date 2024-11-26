@@ -49,31 +49,31 @@ export default function Previtos({ previstos }: AllPrevistos) {
   return (
     <>
       <Head>
-        <title>Brasil Concursos - Concursos Previstos</title>
+        <title>Concursos Agora - Concursos Previstos</title>
         <meta name="description" content="Descubra os concursos públicos previstos no Brasil. Fique por dentro das oportunidades de emprego futuras e informações detalhadas sobre próximos editais e inscrições." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="concursos públicos, concursos previstos, empregos, oportunidades, próximos editais, inscrições, vagas futuras" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.brasilconcursos.com.br/previstos" />
-        <meta property="og:title" content="Brasil Concursos - Concursos Previstos" />
+        <meta property="og:url" content="https://www.concursosagora.com.br/previstos" />
+        <meta property="og:title" content="Concursos Agora - Concursos Previstos" />
         <meta property="og:description" content="Descubra os concursos públicos previstos no Brasil. Fique por dentro das oportunidades de emprego futuras e informações detalhadas sobre próximos editais e inscrições." />
-        <meta property="og:image" content="https://www.brasilconcursos.com.br/images/og-image.jpg" />
+        <meta property="og:image" content="https://www.concursosagora.com.br/images/og-image.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.brasilconcursos.com.br/previstos" />
-        <meta property="twitter:title" content="Brasil Concursos - Concursos Previstos" />
+        <meta property="twitter:url" content="https://www.concursosagora.com.br/previstos" />
+        <meta property="twitter:title" content="Concursos Agora - Concursos Previstos" />
         <meta property="twitter:description" content="Descubra os concursos públicos previstos no Brasil. Fique por dentro das oportunidades de emprego futuras e informações detalhadas sobre próximos editais e inscrições." />
-        <meta property="twitter:image" content="https://www.brasilconcursos.com.br/images/twitter-image.jpg" />
+        <meta property="twitter:image" content="https://www.concursosagora.com.br/images/twitter-image.jpg" />
 
         {/* Additional Meta Tags */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Brasil Concursos" />
-        <link rel="canonical" href="https://www.brasilconcursos.com.br/previstos" />
-        <meta property="og:site_name" content="Brasil Concursos" />
-        <meta name="twitter:site" content="@brasilconcursos" />
+        <meta name="author" content="Concursos Agora" />
+        <link rel="canonical" href="https://www.concursosagora.com.br/previstos" />
+        <meta property="og:site_name" content="Concursos Agora" />
+        <meta name="twitter:site" content="@concursosagora" />
 
         {/* Additional Open Graph Tags */}
         <meta property="og:locale" content="pt_BR" />
@@ -85,7 +85,7 @@ export default function Previtos({ previstos }: AllPrevistos) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Brasil Concursos" />
+        <meta name="apple-mobile-web-app-title" content="Concursos Agora" />
 
         {/* Meta Tags for Theme Color */}
         <meta name="theme-color" content="#1a73e8" />
@@ -93,11 +93,11 @@ export default function Previtos({ previstos }: AllPrevistos) {
 
         {/* Meta Tags for App Links */}
         <meta property="al:ios:app_store_id" content="123456789" />
-        <meta property="al:ios:app_name" content="Brasil Concursos" />
-        <meta property="al:ios:url" content="brasilconcursos://previstos" />
-        <meta property="al:android:package" content="com.brasilconcursos" />
-        <meta property="al:android:app_name" content="Brasil Concursos" />
-        <meta property="al:android:url" content="brasilconcursos://previstos" />
+        <meta property="al:ios:app_name" content="Concursos Agora" />
+        <meta property="al:ios:url" content="concursosagora://previstos" />
+        <meta property="al:android:package" content="com.concursosagora" />
+        <meta property="al:android:app_name" content="Concursos Agora" />
+        <meta property="al:android:url" content="concursosagora://previstos" />
 
         {/* Meta Tags for Site Verification */}
         <meta name="google-site-verification" content="your-google-site-verification-token" />

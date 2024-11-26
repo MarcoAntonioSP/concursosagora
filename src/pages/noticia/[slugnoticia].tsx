@@ -65,7 +65,7 @@ export default function Noticia({ noticia }: NoticiaProps) {
   return (
     <>
       <Head>
-        <title>{noticia.titlenoticia} | Brasil Noticias</title>
+        <title>{noticia.titlenoticia} | ConcursosAgora Noticias</title>
         <meta name="description" content={noticia.subtitlenoticia} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

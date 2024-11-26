@@ -67,7 +67,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
   return (
     <>
       <Head>
-        <title>{previsto.titleprevisto} | Brasil Concursos</title>
+        <title>{previsto.titleprevisto} | ConcursosAgora Concursos</title>
         <meta name="description" content={previsto.subtitleprevisto} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

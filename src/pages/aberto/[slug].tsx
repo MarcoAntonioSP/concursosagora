@@ -67,7 +67,7 @@ export default function Post({ post }: PostProps) {
   return (
     <>
       <Head>
-        <title>{post.title} | Brasil Concursos</title>
+        <title>{post.title} | Concursos Agora</title>
         <meta name="description" content={post.subtitle} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

@@ -52,14 +52,17 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
     <>
       <Head>
         <title>Últimas Notícias</title>
-        <meta name="description" content="Fique atualizado com as últimas notícias e novidades." />
+        <meta
+          name="description"
+          content="Fique atualizado com as últimas notícias e novidades."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Header />
         <Link
           href="/"
-          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
+          className="flex w-full mt-5 max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
         >
           Voltar
         </Link>
@@ -69,6 +72,20 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
           </h1>
         </div>
 
+        {noticias.length > 0 && (
+          <Link
+            href={`/noticia/${noticias[0].slugnoticia}`}
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+          >
+            <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
+              <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
+                {noticias[0].titlenoticia}
+              </h1>
+              <div>
+              </div>
+            </div>
+          </Link>
+        )}
         {noticias.length > 0 && (
           <Link
             href={`/noticia/${noticias[0].slugnoticia}`}
@@ -112,17 +129,22 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
         )}
         <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
           {noticias.length > 0 ? (
-            noticias.slice(1).map((noticia) => (
-              <CardNoticias
-                key={noticia.id}
-                title={noticia.titlenoticia}
-                subtitle={noticia.subtitlenoticia}
-                createdAt={noticia.createdAt}
-                urlImage={noticia.noticiaCoverImage?.url || "/path/to/default/image.jpg"}
-                slug={noticia.slugnoticia}
-                author={noticia.author.name}
-              />
-            ))
+            noticias
+              .slice(1)
+              .map((noticia) => (
+                <CardNoticias
+                  key={noticia.id}
+                  title={noticia.titlenoticia}
+                  subtitle={noticia.subtitlenoticia}
+                  createdAt={noticia.createdAt}
+                  urlImage={
+                    noticia.noticiaCoverImage?.url ||
+                    "/path/to/default/image.jpg"
+                  }
+                  slug={noticia.slugnoticia}
+                  author={noticia.author.name}
+                />
+              ))
           ) : (
             <Empty />
           )}

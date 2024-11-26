@@ -69,7 +69,7 @@ export default function Federal({ federal }: FederalProps) {
   return (
     <>
       <Head>
-        <title>{federal.titlefederal} | Brasil Federal</title>
+        <title>{federal.titlefederal} | ConcursoAgora Federal</title>
         <meta name="description" content={federal.subtitlefederal} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

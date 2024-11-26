@@ -146,7 +146,7 @@ export default function Footer() {
                 href="/anuncie"
                 className="hover:text-blue-400 transition-colors"
               >
-                Anuncie no Brasil Concursos
+                Anuncie no Concursos Agora
               </a>
             </li>
           </ul>
@@ -155,7 +155,7 @@ export default function Footer() {
 
       {/* Footer Base */}
       <div className="mt-8 border-t border-gray-700 pt-4 text-center text-sm text-gray-400">
-        © 2024 ConcursosJá. Todos os direitos reservados.
+        © 2024 Concursos Agora. Todos os direitos reservados.
       </div>
     </footer>
   );

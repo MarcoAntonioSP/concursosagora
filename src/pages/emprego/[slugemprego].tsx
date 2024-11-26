@@ -69,7 +69,7 @@ export default function Emprego({ emprego }: EmpregoProps) {
   return (
     <>
       <Head>
-        <title>{emprego.titleemprego} | Brasil Empregos</title>
+        <title>{emprego.titleemprego} | Concursos Agora</title>
         <meta name="description" content={emprego.subtitlemprego} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

@@ -88,31 +88,31 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
   return (
     <>
       <Head>
-        <title>Brasil Concursos - Concursos Abertos</title>
+        <title>Concursos Agora - Concursos Abertos</title>
         <meta name="description" content="Descubra os concursos públicos abertos no Brasil. Fique por dentro das oportunidades de emprego e informações detalhadas sobre inscrições e editais." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="concursos públicos, concursos abertos, empregos, oportunidades, editais, inscrições, vagas" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.brasilconcursos.com.br/abertos" />
-        <meta property="og:title" content="Brasil Concursos - Concursos Abertos" />
+        <meta property="og:url" content="https://www.concursosagora.com.br/abertos" />
+        <meta property="og:title" content="Concursos Agora - Concursos Abertos" />
         <meta property="og:description" content="Descubra os concursos públicos abertos no Brasil. Fique por dentro das oportunidades de emprego e informações detalhadas sobre inscrições e editais." />
-        <meta property="og:image" content="https://www.brasilconcursos.com.br/images/og-image.jpg" />
+        <meta property="og:image" content="https://www.concursosagora.com.br/images/og-image.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.brasilconcursos.com.br/abertos" />
-        <meta property="twitter:title" content="Brasil Concursos - Concursos Abertos" />
+        <meta property="twitter:url" content="https://www.concursosagora.com.br/abertos" />
+        <meta property="twitter:title" content="Concursos Agora - Concursos Abertos" />
         <meta property="twitter:description" content="Descubra os concursos públicos abertos no Brasil. Fique por dentro das oportunidades de emprego e informações detalhadas sobre inscrições e editais." />
-        <meta property="twitter:image" content="https://www.brasilconcursos.com.br/images/twitter-image.jpg" />
+        <meta property="twitter:image" content="https://www.concursosagora.com.br/images/twitter-image.jpg" />
 
         {/* Additional Meta Tags */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Brasil Concursos" />
-        <link rel="canonical" href="https://www.brasilconcursos.com.br/abertos" />
-        <meta property="og:site_name" content="Brasil Concursos" />
-        <meta name="twitter:site" content="@brasilconcursos" />
+        <meta name="author" content="Concursos Agora" />
+        <link rel="canonical" href="https://www.concursosagora.com.br/abertos" />
+        <meta property="og:site_name" content="Concursos Agora" />
+        <meta name="twitter:site" content="@concursosagora" />
       </Head>
       <div className='w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4'>
         <Header />
