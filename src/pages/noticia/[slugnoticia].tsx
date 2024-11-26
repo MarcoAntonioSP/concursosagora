@@ -4,9 +4,9 @@ import { client } from "@/lib/apollo";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import Image, { ImageProps } from "next/image";
 import { Header } from "@/components/Header";
 import Head from "next/head";
+import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
@@ -62,10 +62,6 @@ interface NoticiaProps {
 }
 
 export default function Noticia({ noticia }: NoticiaProps) {
-  if (!noticia.contentNoticia || !noticia.contentNoticia.json) {
-    return <div>Conteúdo não disponível</div>;
-  }
-
   return (
     <>
       <Head>
@@ -75,6 +71,13 @@ export default function Noticia({ noticia }: NoticiaProps) {
       </Head>
       <Header />
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
+        <Link
+          href="/"
+          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
+        >
+          Voltar
+        </Link>
+
         <div className="w-full h-full flex flex-col mt-8">
           {noticia.noticiaCoverImage?.url && (
             <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
@@ -156,7 +159,7 @@ export default function Noticia({ noticia }: NoticiaProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio
+                    return <></>; // Retorna um fragmento vazio em vez de null
                   }
                   return (
                     <div className="my-4">
@@ -193,8 +196,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     if (!data || !data.noticia) {
       return { notFound: true };
     }
-
-    console.log("Fetched data:", data);
 
     return {
       props: { noticia: data.noticia },

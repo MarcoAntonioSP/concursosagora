@@ -106,7 +106,6 @@ const GET_ALL_FEDERAIS = gql`
     }
   }
 `;
-
 interface AllPosts {
   posts: {
     id: string;
@@ -154,6 +153,7 @@ interface AllEmpregos {
     };
   }[];
 }
+
 interface AllNoticias {
   noticias: {
     id: string;
@@ -186,6 +186,7 @@ interface AllFederais {
     };
   }[];
 }
+
 
 export default function Home({
   posts,
@@ -300,7 +301,7 @@ export default function Home({
             </div>
             <div>
               <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
-                Noticias
+                Federais
               </h2>
               <ListaFederais federais={federais.slice(0 ,3)} />
             </div>
