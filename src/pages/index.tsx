@@ -154,18 +154,20 @@ interface AllEmpregos {
     };
   }[];
 }
-interface Noticia {
-  id: string;
-  slugnoticia: string;
-  titlenoticia: string;
-  subtitlenoticia: string;
-  createdAt: string;
-  noticiaCoverImage: {
-    url: string;
-  };
-  author: {
-    name: string;
-  };
+interface AllNoticias {
+  noticias: {
+    id: string;
+    slugnoticia: string;
+    titlenoticia: string;
+    subtitlenoticia: string;
+    createdAt: string;
+    noticiaCoverImage: {
+      url: string;
+    };
+    author: {
+      name: string;
+    };
+  }[];
 }
 
 interface AllFederais {

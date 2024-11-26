@@ -1,28 +1,28 @@
-import { gql } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { client } from '@/lib/apollo';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-import { RichText } from '@graphcms/rich-text-react-renderer';
+import { gql } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { client } from "@/lib/apollo";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { RichText } from "@graphcms/rich-text-react-renderer";
 import Image, { ImageProps } from "next/image";
-import { Header } from '@/components/Header';
-import Head from 'next/head';
-import Link from 'next/link';
-import { ElementNode } from '@graphcms/rich-text-types';
-import Footer from '@/components/footer/Footer';
+import { Header } from "@/components/Header";
+import Head from "next/head";
+import Link from "next/link";
+import { ElementNode } from "@graphcms/rich-text-types";
+import Footer from "@/components/footer/Footer";
 
-// Query para obter os dados do "federal" por slug
-const GET_FEDERAL = gql`
-  query GetFederal($slugFederal: String!) {
-    federal(where: { slugfederal: $slugFederal }) {
+// Query para obter os dados da "noticia" por slug
+const GET_NOTICIA = gql`
+  query GetNoticia($slugNoticia: String!) {
+    noticia(where: { slugnoticia: $slugNoticia }) {
       id
-      titlefederal
-      subtitlefederal
-      slugfederal
-      federalCoverImage {
+      titlenoticia
+      subtitlenoticia
+      slugnoticia
+      noticiaCoverImage {
         url
       }
-      contentFederal {
+      contentNoticia {
         json
       }
       author {
@@ -33,25 +33,25 @@ const GET_FEDERAL = gql`
   }
 `;
 
-// Query para obter todos os slugs dos federais
-const GET_FEDERAL_SLUGS = gql`
-  query GetAllFederalSlugs {
-    federais {
-      slugfederal
+// Query para obter todos os slugs das noticias
+const GET_NOTICIA_SLUGS = gql`
+  query GetAllNoticiaSlugs {
+    noticias {
+      slugnoticia
     }
   }
 `;
 
-interface FederalProps {
-  federal: {
+interface NoticiaProps {
+  noticia: {
     id: string;
-    titlefederal: string;
-    subtitlefederal: string;
-    slugfederal: string;
-    federalCoverImage?: {
+    titlenoticia: string;
+    subtitlenoticia: string;
+    slugnoticia: string;
+    noticiaCoverImage?: {
       url: string;
     };
-    contentFederal: {
+    contentNoticia: {
       json: ElementNode[];
     };
     author: {
@@ -61,35 +61,28 @@ interface FederalProps {
   };
 }
 
-export default function Federal({ federal }: FederalProps) {
-  if (!federal.contentFederal || !federal.contentFederal.json) {
+export default function Noticia({ noticia }: NoticiaProps) {
+  if (!noticia.contentNoticia || !noticia.contentNoticia.json) {
     return <div>Conteúdo não disponível</div>;
   }
 
   return (
     <>
       <Head>
-        <title>{federal.titlefederal} | Brasil Federal</title>
-        <meta name="description" content={federal.subtitlefederal} />
+        <title>{noticia.titlenoticia} | Brasil Noticias</title>
+        <meta name="description" content={noticia.subtitlenoticia} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Header />
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
-        <Link
-          href="/"
-          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
-        >
-          Voltar
-        </Link>
-
         <div className="w-full h-full flex flex-col mt-8">
-          {federal.federalCoverImage?.url && (
+          {noticia.noticiaCoverImage?.url && (
             <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
               <Image
-                src={federal.federalCoverImage.url}
-                alt={federal.titlefederal}
+                src={noticia.noticiaCoverImage.url}
+                alt={noticia.titlenoticia}
                 fill={true}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: "cover" }}
               />
             </div>
           )}
@@ -97,15 +90,15 @@ export default function Federal({ federal }: FederalProps) {
 
         <div className="flex w-full flex-col mt-4 sm:mt-8">
           <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
-            {federal.titlefederal}
+            {noticia.titlenoticia}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">
-            {federal.subtitlefederal}
+            {noticia.subtitlenoticia}
           </h2>
           <div>
-            <p className="font-bold text-zinc-900">{federal.author.name}</p>
+            <p className="font-bold text-zinc-900">{noticia.author.name}</p>
             <p className="text-zinc-600 text-sm">
-              {format(new Date(federal.createdAt), "dd 'de' MMM 'de' yyyy", {
+              {format(new Date(noticia.createdAt), "dd 'de' MMM 'de' yyyy", {
                 locale: ptBR,
               })}
             </p>
@@ -113,7 +106,7 @@ export default function Federal({ federal }: FederalProps) {
 
           <div className="mt-4 sm:mt-8">
             <RichText
-              content={federal.contentFederal.json}
+              content={noticia.contentNoticia.json}
               renderers={{
                 h1: ({ children }) => (
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 my-4">
@@ -187,28 +180,28 @@ export default function Federal({ federal }: FederalProps) {
   );
 }
 
-// Get Static Props: fetch data for the specific "federal"
+// Get Static Props: fetch data for the specific "noticia"
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slugfederal;
+  const slug = ctx.params?.slugnoticia;
 
   try {
     const { data } = await client.query({
-      query: GET_FEDERAL,
-      variables: { slugFederal: slug },
+      query: GET_NOTICIA,
+      variables: { slugNoticia: slug },
     });
 
-    if (!data || !data.federal) {
+    if (!data || !data.noticia) {
       return { notFound: true };
     }
 
     console.log("Fetched data:", data);
 
     return {
-      props: { federal: data.federal },
+      props: { noticia: data.noticia },
       revalidate: 60 * 30, // 30 minutos
     };
   } catch (error) {
-    console.error("Error fetching federal data:", error);
+    console.error("Error fetching noticia data:", error);
     return { notFound: true };
   }
 };
@@ -217,12 +210,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
     const { data } = await client.query({
-      query: GET_FEDERAL_SLUGS,
+      query: GET_NOTICIA_SLUGS,
     });
 
     const paths =
-      data?.federais.map((federal: { slugfederal: string }) => ({
-        params: { slugfederal: federal.slugfederal },
+      data?.noticias.map((noticia: { slugnoticia: string }) => ({
+        params: { slugnoticia: noticia.slugnoticia },
       })) || [];
 
     return {
