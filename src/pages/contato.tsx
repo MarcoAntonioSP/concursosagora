@@ -102,21 +102,17 @@ export default function Contato() {
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-3 py-5 w-full">
                 <h3 className="font-bold text-gray-700">Endereço</h3>
-                <p>Rua Exemplo, 123, Cidade - Estado</p>
-              </div>
-              <div className="flex flex-col gap-3 py-5 w-full">
-                <h3 className="font-bold text-gray-700">Telefone</h3>
-                <p>(11) 9 1234-5678</p>
+                <p>Ferraz de Vascocelos - SP</p>
               </div>
               <div className="flex flex-col gap-3 py-5 w-full">
                 <h3 className="font-bold text-gray-700">E-mail</h3>
-                <p>contato@seusite.com</p>
+                <p>marco.agostinoo@hotmail.com</p>
               </div>
             </div>
             <div className="flex flex-col bg-gray-100 rounded-lg">
               <h3 className="text-xl font-bold text-center m-0">Localização</h3>
               <div className="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-lg shadow-md">
-                <iframe
+                {/* <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.083278957953!2d-46.52489182466622!3d-23.539763723168784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5c8fa0f05b5f%3A0x3e1a96b5852e7da4!2sRua%20Jorge%20Tibiri%C3%A7%C3%A1%2C%2023%20-%20Ferraz%20de%20Vasconcelos%20-%20SP%2C%2008539-000!5e0!3m2!1spt-BR!2sbr!4v1730984778476!5m2!1spt-BR!2sbr"
                   width="600"
                   height="450"
@@ -124,7 +120,7 @@ export default function Contato() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                ></iframe> */}
               </div>
             </div>
           </div>

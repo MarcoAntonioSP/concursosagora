@@ -102,7 +102,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="/contato"
+                href="/sobre"
                 className="hover:text-blue-400 transition-colors"
               >
                 Sobre Nós
@@ -119,36 +119,36 @@ export default function Footer() {
           <ul className="flex flex-col space-y-2">
             <li>
               <a
-                href="/politica-privacidade"
+                href="/politicaprivacidade"
                 className="hover:text-blue-400 transition-colors"
               >
                 Política de Privacidade
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="/termos-uso"
                 className="hover:text-blue-400 transition-colors"
               >
                 Termos de Uso
               </a>
-            </li>
+            </li> */}
             <li>
               <a
-                href="/fale-conosco"
+                href="/contato"
                 className="hover:text-blue-400 transition-colors"
               >
                 Fale Conosco
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href="/anuncie"
                 className="hover:text-blue-400 transition-colors"
               >
                 Anuncie no Concursos Agora
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
