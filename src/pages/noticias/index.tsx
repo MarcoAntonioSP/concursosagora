@@ -81,8 +81,7 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
               <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
                 {noticias[0].titlenoticia}
               </h1>
-              <div>
-              </div>
+              <div></div>
             </div>
           </Link>
         )}
@@ -91,7 +90,7 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
             href={`/noticia/${noticias[0].slugnoticia}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
-            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative rounded-2xl overflow-hidden">
+            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
               {noticias[0].noticiaCoverImage ? (
                 <Image
                   src={noticias[0].noticiaCoverImage.url}

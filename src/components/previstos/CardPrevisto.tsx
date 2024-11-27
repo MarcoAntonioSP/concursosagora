@@ -18,7 +18,7 @@ export function CardPrevisto({ author, createdAt, subtitle, title, urlImage, slu
       href={`/previsto/${slug}`}
       className="w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all"
     >
-      <div className='flex w-full h-[200px] sm:h-[234px] relative rounded-2xl overflow-hidden'>
+      <div className='flex w-full h-[200px] sm:h-[234px] relative  overflow-hidden'>
         <Image 
           src={urlImage}
           alt=""

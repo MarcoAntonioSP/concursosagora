@@ -261,7 +261,7 @@ export default function Home({
                 className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full h-full p-4 sm:p-6 mt-12 hover:brightness-75 transition-all"
               >
                 <div className="flex flex-1 flex-col gap-3 lg:gap-6 text-center sm:text-left">
-                  <h1 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-blue-600 line-clamp-2">
+                  <h1 className="font-bold text-xl text sm:text-2xl md:text-3xl lg:text-4xl text-blue-600 line-clamp-2">
                     {noticias[0].titlenoticia}
                   </h1>
                   <div>
@@ -273,19 +273,9 @@ export default function Home({
 
             <Link
               href={`/aberto/${posts[0].slug}`}
-              className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+              className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-1 hover:brightness-75 transition-all"
             >
-              <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
-                <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
-                  {posts[0].title}
-                </h1>
-              </div>
-            </Link>
-            <Link
-              href={`/aberto/${posts[0].slug}`}
-              className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
-            >
-              <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative rounded-2xl overflow-hidden">
+              <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
                 <Image
                   src={posts[0].coverImage.url}
                   alt=""

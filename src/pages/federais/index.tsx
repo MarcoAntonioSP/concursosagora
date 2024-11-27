@@ -72,7 +72,7 @@ export default function Home({ federais }: AllFederais) {
             href={`/federal/${federais[0].slugfederal}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
-            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative rounded-2xl overflow-hidden">
+            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
               {federais[0].federalCoverImage ? (
                 <Image
                   src={federais[0].federalCoverImage.url}
@@ -110,17 +110,22 @@ export default function Home({ federais }: AllFederais) {
         )}
         <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
           {federais.length > 0 ? (
-            federais.slice(1, 1000).map((federal) => (
-              <CardFederal
-                key={federal.id}
-                title={federal.titlefederal}
-                subtitle={federal.subtitlefederal}
-                createdAt={federal.createdAt}
-                urlImage={federal.federalCoverImage?.url || "/path/to/default/image.jpg"}
-                slug={federal.slugfederal}
-                author={federal.author.name}
-              />
-            ))
+            federais
+              .slice(1, 1000)
+              .map((federal) => (
+                <CardFederal
+                  key={federal.id}
+                  title={federal.titlefederal}
+                  subtitle={federal.subtitlefederal}
+                  createdAt={federal.createdAt}
+                  urlImage={
+                    federal.federalCoverImage?.url ||
+                    "/path/to/default/image.jpg"
+                  }
+                  slug={federal.slugfederal}
+                  author={federal.author.name}
+                />
+              ))
           ) : (
             <Empty />
           )}

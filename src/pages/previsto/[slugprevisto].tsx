@@ -82,12 +82,12 @@ export default function Previsto({ previsto }: PrevistoProps) {
 
         <div className="w-full h-full flex flex-col mt-8">
           {previsto.previstoCoverImage?.url && (
-            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
               <Image
                 src={previsto.previstoCoverImage.url}
                 alt={previsto.titleprevisto}
                 fill={true}
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain" }}
               />
             </div>
           )}
@@ -164,7 +164,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
                     return <></>; // Retorna um fragmento vazio em vez de null
                   }
                   return (
-                    <div className="my-4">
+                    <div className="my-6  align-middle justify-center">
                       <Image
                         src={src}
                         alt={alt}

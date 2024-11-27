@@ -84,7 +84,7 @@ export default function Post({ post }: PostProps) {
 
         <div className="w-full h-full flex flex-col mt-8">
           {post.coverImage && post.coverImage.url && (
-            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
               <Image
                 src={post.coverImage.url}
                 alt={post.title}
@@ -161,7 +161,7 @@ export default function Post({ post }: PostProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>;  // Retorna um fragmento vazio em vez de null
+                    return <></>; // Retorna um fragmento vazio em vez de null
                   }
                   return (
                     <div className="my-4">
@@ -174,20 +174,19 @@ export default function Post({ post }: PostProps) {
                       />
                     </div>
                   );
-                }
-                
+                },
               }}
             />
           </div>
 
           {post.coverImage2 && post.coverImage2.url && (
             <div className="w-full h-full flex flex-col mt-8">
-              <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+              <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
                 <Image
                   src={post.coverImage2.url}
                   alt={post.title}
                   fill={true}
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "contain" }}
                 />
               </div>
             </div>
@@ -246,7 +245,7 @@ export default function Post({ post }: PostProps) {
                   img: (props: Partial<ImageProps>) => {
                     const { src, alt = "" } = props;
                     if (!src) {
-                      return <></>;  // Retorna um fragmento vazio em vez de null
+                      return <></>; // Retorna um fragmento vazio em vez de null
                     }
                     return (
                       <div className="my-4">
@@ -259,8 +258,7 @@ export default function Post({ post }: PostProps) {
                         />
                       </div>
                     );
-                  }
-                  
+                  },
                 }}
               />
             )}

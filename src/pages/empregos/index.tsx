@@ -72,7 +72,7 @@ export default function Home({ empregos }: AllEmpregos) {
             href={`/emprego/${empregos[0].slugemprego}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
-            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative rounded-2xl overflow-hidden">
+            <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
               <Image
                 src={empregos[0].empregoCoverImage.url}
                 alt=""

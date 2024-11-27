@@ -80,12 +80,12 @@ export default function Noticia({ noticia }: NoticiaProps) {
 
         <div className="w-full h-full flex flex-col mt-8">
           {noticia.noticiaCoverImage?.url && (
-            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
               <Image
                 src={noticia.noticiaCoverImage.url}
                 alt={noticia.titlenoticia}
                 fill={true}
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain" }}
               />
             </div>
           )}

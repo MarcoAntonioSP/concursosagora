@@ -1,15 +1,15 @@
-import { gql } from '@apollo/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { client } from '@/lib/apollo';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-import { RichText } from '@graphcms/rich-text-react-renderer';
+import { gql } from "@apollo/client";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { client } from "@/lib/apollo";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { RichText } from "@graphcms/rich-text-react-renderer";
 import Image, { ImageProps } from "next/image";
-import { Header } from '@/components/Header';
-import Head from 'next/head';
-import Link from 'next/link';
-import { ElementNode } from '@graphcms/rich-text-types';
-import Footer from '@/components/footer/Footer';
+import { Header } from "@/components/Header";
+import Head from "next/head";
+import Link from "next/link";
+import { ElementNode } from "@graphcms/rich-text-types";
+import Footer from "@/components/footer/Footer";
 
 // Query para obter os dados do "federal" por slug
 const GET_FEDERAL = gql`
@@ -84,12 +84,12 @@ export default function Federal({ federal }: FederalProps) {
 
         <div className="w-full h-full flex flex-col mt-8">
           {federal.federalCoverImage?.url && (
-            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative rounded-2xl overflow-hidden">
+            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
               <Image
                 src={federal.federalCoverImage.url}
                 alt={federal.titlefederal}
                 fill={true}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: "contain" }}
               />
             </div>
           )}
