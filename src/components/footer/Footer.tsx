@@ -6,11 +6,13 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {/* Redes Sociais */}
         <div className="flex flex-col items-center sm:items-start">
-          <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">Redes Sociais</h3>
+          <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">
+            Redes Sociais
+          </h3>
           <ul className="flex space-x-6 justify-center sm:justify-start">
             <li>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61569670136437"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -24,7 +26,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://instagram.com"
+                href="https://www.facebook.com/profile.php?id=61569670136437"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -52,7 +54,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://linkedin.com"
+                href="https://www.facebook.com/profile.php?id=61569670136437"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -69,7 +71,9 @@ export default function Footer() {
 
         {/* Navegação */}
         <div className="flex flex-col items-center sm:items-start">
-          <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">Navegação</h3>
+          <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">
+            Navegação
+          </h3>
           <ul className="flex flex-col space-y-2">
             <li>
               <a href="/" className="hover:text-blue-400 transition-colors">
