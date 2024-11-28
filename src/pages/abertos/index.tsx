@@ -4,7 +4,7 @@ import Link from "next/link";
 import { gql } from "@apollo/client";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { CardPost } from "@/components/postabertos/CardPost";
+import { CardPost } from "@/components/postabertos/CardPost"; // Certifique-se de que a importação está correta
 import { Header } from "@/components/Header";
 import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
@@ -24,6 +24,9 @@ const GET_ALL_POSTS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -61,6 +64,9 @@ interface AllPosts {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -178,7 +184,6 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
                   style={{ objectFit: "cover" }}
                 />
               </div>
-
               <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
                 <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
                   {posts[0].title}
@@ -186,19 +191,34 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
                 <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
                   {posts[0].subtitle}
                 </p>
-                <div>
-                  <p className="font-bold text-zinc-900 text-sm md:text-base">
-                    {posts[0].title}
-                  </p>
-                  <p className="text-zinc-600 text-xs md:text-sm">
-                    {format(
-                      new Date(posts[0].createdAt),
-                      "dd 'de' MMM 'de' yyyy",
-                      { locale: ptBR }
-                    )}
-                  </p>
-                </div>
               </div>
+            </Link>
+            <Link href="/" legacyBehavior>
+              <a className="block">
+                <div className="author-info flex items-center mt-2">
+                  {posts[0].author.coverImageAuthor?.url && (
+                    <Image
+                      src={posts[0].author.coverImageAuthor.url}
+                      alt={posts[0].author.name}
+                      width={50}
+                      height={50}
+                      className="rounded-full mr-2"
+                    />
+                  )}
+                  <div>
+                    <p className="font-bold text-zinc-900 text-sm md:text-base">
+                      {posts[0].author.name}
+                    </p>
+                    <p className="text-zinc-600 text-xs md:text-sm">
+                      {format(
+                        new Date(posts[0].createdAt),
+                        "dd 'de' MMM 'de' yyyy",
+                        { locale: ptBR }
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </a>
             </Link>
 
             <div className="flex flex-col items-center sm:grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 mt-12">
@@ -207,6 +227,7 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
                   key={post.id}
                   title={post.title}
                   author={post.author.name}
+                  authorImage={post.author.coverImageAuthor?.url || ""}
                   createdAt={post.createdAt}
                   subtitle={post.subtitle}
                   urlImage={post.coverImage.url}

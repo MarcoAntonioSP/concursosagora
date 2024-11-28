@@ -32,6 +32,9 @@ const GET_POST = gql`
       }
       author {
         name
+        coverImageAuthor {
+          url
+        }
       }
       createdAt
     }
@@ -58,12 +61,19 @@ interface PostProps {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
     createdAt: string;
   };
 }
 
 export default function Post({ post }: PostProps) {
+  if (!post) {
+    return <p>Carregando...</p>;
+  }
+
   return (
     <>
       <Head>
@@ -100,14 +110,28 @@ export default function Post({ post }: PostProps) {
             {post.title}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">{post.subtitle}</h2>
-          <div>
-            <p className="font-bold text-zinc-900">{post.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(post.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
-          </div>
+
+          <Link href="/" legacyBehavior>
+            <a className="w-full flex items-center mt-2">
+              {post.author.coverImageAuthor?.url && (
+                <Image
+                  src={post.author.coverImageAuthor.url}
+                  alt={post.author.name}
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
+              )}
+              <div>
+                <p className="font-bold text-zinc-900">{post.author.name}</p>
+                <p className="text-zinc-600 text-sm">
+                  {format(new Date(post.createdAt), "dd 'de' MMM 'de' yyyy", {
+                    locale: ptBR,
+                  })}
+                </p>
+              </div>
+            </a>
+          </Link>
 
           <div className="mt-4 sm:mt-8">
             <RichText
@@ -247,7 +271,7 @@ export default function Post({ post }: PostProps) {
                     if (!src) {
                       return <></>; // Retorna um fragmento vazio em vez de null
                     }
-                    return (
+                    return                     (
                       <div className="my-4">
                         <Image
                           src={src}

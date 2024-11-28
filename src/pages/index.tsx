@@ -30,6 +30,9 @@ const GET_ALL_POSTS = gql`
       }
       author {
         name
+        coverImageAuthor {
+          url
+        }
       }
     }
   }
@@ -118,6 +121,9 @@ interface AllPosts {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
