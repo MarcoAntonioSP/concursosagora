@@ -460,7 +460,7 @@ export default function PostsList() {
           </div>
         )}
       </div>
-      <div className="w-full sm:w-3/10 m-1 mb-72 sticky top-0 mt-10 h-screen">
+      <div className="w-full sm:w-3/10 m-1 mb-5 md:mb-72 sticky top-0 mt-10 h-screen">
         <h2 className="text-2xl font-bold text-blue-600 mb-4">
           Como se Preparar para Concursos Públicos 🎓
         </h2>
