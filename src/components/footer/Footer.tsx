@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full p-8 bg-gray-800 text-white">
+    <footer className="w-full mt-5 p-8 bg-gray-800 text-white">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {/* Redes Sociais */}
         <div className="flex flex-col items-center sm:items-start">
