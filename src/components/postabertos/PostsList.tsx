@@ -241,39 +241,38 @@ export default function PostsList() {
   const secondFederal = federaisData?.federais[1];
 
   return (
-    <div className="flex w-full">
-      <div className="flex  w-7/10 text-gray-800 flex-col mt-1  mb-1 space-y-8 p-2 ">
+    <div className="flex w-full flex-col md:flex-row">
+      <div className="flex w-full text-gray-800 flex-col mt-1 mb-1 space-y-8 p-2">
         {secondPost && (
           <div
-            className="border-b-2 border-t-2  mt-1 pb-7 pt-7 border-stone-200"
+            className="border-b-2 border-t-2 mt-1 pb-7 pt-7 border-stone-200"
             key={secondPost.id}
           >
-            <Link href={`/aberto/${secondPost.slug}`} className="flex w-full">
-              <div className="flex relative flex-shrink-0">
+            <Link
+              href={`/aberto/${secondPost.slug}`}
+              className="flex w-full flex-col md:flex-row"
+            >
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={secondPost.coverImage.url}
                   alt={secondPost.title}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="flex ms-2 flex-col justify-around">
-                <div>
-                  <h2 className=" text-2xl  text-wrap">{secondPost.title}</h2>
-                </div>
-                <div>
-                  <p className="post-subtitle">{secondPost.subtitle}</p>
-                  <div className=" flex text-sm  font-semibold">
-                    <p className="post-author">{secondPost.author.name} | </p>
-                    <p className="ms-1 text-gray-500">
-                      {format(
-                        new Date(secondPost.createdAt),
-                        "dd 'de' MMM 'de' yyyy",
-                        { locale: ptBR }
-                      )}
-                    </p>
-                  </div>
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{secondPost.title}</h2>
+                <p className="post-subtitle">{secondPost.subtitle}</p>
+                <div className="flex text-sm font-semibold">
+                  <p className="post-author">{secondPost.author.name} | </p>
+                  <p className="ms-1 text-gray-500">
+                    {format(
+                      new Date(secondPost.createdAt),
+                      "dd 'de' MMM 'de' yyyy",
+                      { locale: ptBR }
+                    )}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -282,35 +281,34 @@ export default function PostsList() {
 
         {thirtPost && (
           <div
-            className="border-b-2 border-t-2  mt-1 pb-7 pt-7 border-stone-200"
+            className="border-b-2 border-t-2 mt-1 pb-7 pt-7 border-stone-200"
             key={thirtPost.id}
           >
-            <Link href={`/aberto/${thirtPost.slug}`} className="flex w-full">
-              <div className="flex relative flex-shrink-0">
+            <Link
+              href={`/aberto/${thirtPost.slug}`}
+              className="flex w-full flex-col md:flex-row"
+            >
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={thirtPost.coverImage.url}
                   alt={thirtPost.title}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="flex ms-2 flex-col justify-around">
-                <div>
-                  <h2 className=" text-2xl  text-wrap">{thirtPost.title}</h2>
-                </div>
-                <div>
-                  <p className="post-subtitle">{thirtPost.subtitle}</p>
-                  <div className=" flex text-sm  font-semibold">
-                    <p className="post-author">{thirtPost.author.name} | </p>
-                    <p className="ms-1 text-gray-500">
-                      {format(
-                        new Date(thirtPost.createdAt),
-                        "dd 'de' MMM 'de' yyyy",
-                        { locale: ptBR }
-                      )}
-                    </p>
-                  </div>
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{thirtPost.title}</h2>
+                <p className="post-subtitle">{thirtPost.subtitle}</p>
+                <div className="flex text-sm font-semibold">
+                  <p className="post-author">{thirtPost.author.name} | </p>
+                  <p className="ms-1 text-gray-500">
+                    {format(
+                      new Date(thirtPost.createdAt),
+                      "dd 'de' MMM 'de' yyyy",
+                      { locale: ptBR }
+                    )}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -324,39 +322,31 @@ export default function PostsList() {
           >
             <Link
               href={`/previsto/${secondPrevisto.slugprevisto}`}
-              className="flex w-full"
+              className="flex w-full flex-col md:flex-row"
             >
-              <div className="flex relative flex-shrink-0">
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={secondPrevisto.previstoCoverImage.url}
                   alt={secondPrevisto.titleprevisto}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="flex ms-2 flex-col justify-around">
-                <div>
-                  <h2 className="text-2xl text-wrap">
-                    {secondPrevisto.titleprevisto}
-                  </h2>
-                </div>
-                <div>
-                  <p className="post-subtitle">
-                    {secondPrevisto.subtitleprevisto}
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{secondPrevisto.titleprevisto}</h2>
+                <p className="post-subtitle">
+                  {secondPrevisto.subtitleprevisto}
+                </p>
+                <div className="flex text-sm font-semibold">
+                  <p className="post-author">{secondPrevisto.author.name} | </p>
+                  <p className="ms-1 text-gray-500">
+                    {format(
+                      new Date(secondPrevisto.createdAt),
+                      "dd 'de' MMM 'de' yyyy",
+                      { locale: ptBR }
+                    )}
                   </p>
-                  <div className="flex text-sm font-semibold">
-                    <p className="post-author">
-                      {secondPrevisto.author.name} |{" "}
-                    </p>
-                    <p className="ms-1 text-gray-500">
-                      {format(
-                        new Date(secondPrevisto.createdAt),
-                        "dd 'de' MMM 'de' yyyy",
-                        { locale: ptBR }
-                      )}
-                    </p>
-                  </div>
                 </div>
               </div>
             </Link>
@@ -365,30 +355,28 @@ export default function PostsList() {
 
         {secondEmprego && (
           <div
-            className="second-emprego border-b-2 pb-5 border-stone-200"
+            className="border-b-2 pb-5 border-stone-200"
             key={secondEmprego.id}
           >
             <Link
               href={`/emprego/${secondEmprego.slugemprego}`}
-              className="flex w-full"
+              className="flex w-full flex-col md:flex-row"
             >
-              <div className="second-emprego-image flex relative flex-shrink-0">
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={secondEmprego.empregoCoverImage.url}
                   alt={secondEmprego.titleemprego}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="second-emprego-content flex flex-col justify-around">
-                <h2 className="text-2xl text-wrap">
-                  {secondEmprego.titleemprego}
-                </h2>
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{secondEmprego.titleemprego}</h2>
                 <p className="post-subtitle">{secondEmprego.subtitlemprego}</p>
                 <div className="flex font-semibold">
                   <p className="post-author">{secondEmprego.author.name}</p>
-                  <p className="post-date">
+                  <p className="ms-1 text-gray-500">
                     {format(
                       new Date(secondEmprego.createdAt),
                       "dd 'de' MMM 'de' yyyy",
@@ -403,30 +391,28 @@ export default function PostsList() {
 
         {secondNoticia && (
           <div
-            className="second-noticia border-b-2 pb-5 border-stone-200"
+            className="border-b-2 pb-5 border-stone-200"
             key={secondNoticia.id}
           >
             <Link
               href={`/noticia/${secondNoticia.slugnoticia}`}
-              className="flex w-full"
+              className="flex w-full flex-col md:flex-row"
             >
-              <div className="second-noticia-image flex relative flex-shrink-0">
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={secondNoticia.noticiaCoverImage.url}
                   alt={secondNoticia.titlenoticia}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="second-noticia-content flex flex-col justify-around">
-                <h2 className="text-2xl text-wrap">
-                  {secondNoticia.titlenoticia}
-                </h2>
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{secondNoticia.titlenoticia}</h2>
                 <p className="post-subtitle">{secondNoticia.subtitlenoticia}</p>
                 <div className="flex font-semibold">
                   <p className="post-author">{secondNoticia.author.name}</p>
-                  <p className="post-date">
+                  <p className="ms-1 text-gray-500">
                     {format(
                       new Date(secondNoticia.createdAt),
                       "dd 'de' MMM 'de' yyyy",
@@ -441,29 +427,27 @@ export default function PostsList() {
 
         {secondFederal && (
           <div
-            className="second-federal border-b-2 pb-5 border-stone-200"
+            className="border-b-2 pb-5 border-stone-200"
             key={secondFederal.id}
           >
             <Link
               href={`/federal/${secondFederal.slugfederal}`}
-              className="flex w-full"
+              className="flex w-full flex-col md:flex-row"
             >
-              <div className="second-federal-image flex relative flex-shrink-0">
+              <div className="flex relative flex-shrink-0 mb-4 md:mb-0 md:w-1/3">
                 <Image
                   src={secondFederal.federalCoverImage.url}
                   alt={secondFederal.titlefederal}
                   width={200}
                   height={200}
-                  style={{ objectFit: "cover" }}
+                  className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="second-federal-content flex flex-col justify-around">
-                <h2 className="text-2xl text-wrap">
-                  {secondFederal.titlefederal}
-                </h2>
+              <div className="flex ms-2 flex-col justify-around w-full">
+                <h2 className="text-2xl">{secondFederal.titlefederal}</h2>
                 <div className="flex font-semibold">
                   <p className="post-author">{secondFederal.author.name}</p>
-                  <p className="post-date">
+                  <p className="ms-1 text-gray-500">
                     {format(
                       new Date(secondFederal.createdAt),
                       "dd 'de' MMM 'de' yyyy",
@@ -476,7 +460,7 @@ export default function PostsList() {
           </div>
         )}
       </div>
-      <div className="w-3/10 m-1 mb-64 sticky top-0 mt-10 h-screen ">
+      <div className="w-full sm:w-3/10 m-1 mb-72 sticky top-0 mt-10 h-screen">
         <h2 className="text-2xl font-bold text-blue-600 mb-4">
           Como se Preparar para Concursos Públicos 🎓
         </h2>
