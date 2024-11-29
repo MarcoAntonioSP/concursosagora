@@ -10,6 +10,7 @@ import { client } from "@/lib/apollo";
 import Empty from "@/components/Empty";
 import Footer from "@/components/footer/Footer";
 import { CardPrevisto } from "@/components/previstos/CardPrevisto";
+import PostsList from "@/components/postabertos/PostsList";
 
 const GET_ALL_PREVISTOS = gql`
   query MyQuery {
@@ -220,6 +221,7 @@ export default function Previtos({ previstos }: AllPrevistos) {
           )}
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

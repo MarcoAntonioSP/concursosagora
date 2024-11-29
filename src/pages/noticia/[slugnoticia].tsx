@@ -10,6 +10,7 @@ import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 // Query para obter os dados da "noticia" por slug
 const GET_NOTICIA = gql`
@@ -178,6 +179,7 @@ export default function Noticia({ noticia }: NoticiaProps) {
           </div>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

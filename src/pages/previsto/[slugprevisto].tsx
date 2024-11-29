@@ -10,6 +10,7 @@ import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 // Query para obter os dados do "previsto" por slug
 const GET_PREVISTO = gql`
@@ -180,6 +181,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
           </div>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

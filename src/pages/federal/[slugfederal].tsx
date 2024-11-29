@@ -10,6 +10,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 // Query para obter os dados do "federal" por slug
 const GET_FEDERAL = gql`
@@ -182,6 +183,7 @@ export default function Federal({ federal }: FederalProps) {
           </div>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

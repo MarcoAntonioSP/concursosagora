@@ -10,6 +10,7 @@ import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import { CardEmprego } from "@/components/empregos/CardEmprego";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 const GET_ALL_EMPREGOS = gql`
   query GetAllEmpregos {
@@ -122,6 +123,7 @@ export default function Home({ empregos }: AllEmpregos) {
           )}
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

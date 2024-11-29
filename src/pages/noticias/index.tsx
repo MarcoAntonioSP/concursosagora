@@ -10,6 +10,7 @@ import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import Footer from "@/components/footer/Footer";
 import { CardNoticias } from "@/components/noticias/CardNoticias";
+import PostsList from "@/components/postabertos/PostsList";
 
 const GET_ALL_NOTICIAS = gql`
   query GetAllNoticias {
@@ -149,6 +150,7 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
           )}
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

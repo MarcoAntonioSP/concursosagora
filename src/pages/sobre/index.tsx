@@ -1,5 +1,6 @@
 import Footer from "@/components/footer/Footer";
 import { Header } from "@/components/Header";
+import PostsList from "@/components/postabertos/PostsList";
 
 export default function sobre() {
   return (
@@ -53,6 +54,7 @@ export default function sobre() {
           </section>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </div>
   );

@@ -10,6 +10,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 const GET_POST = gql`
   query GetPost($slugPost: String) {
@@ -289,6 +290,7 @@ export default function Post({ post }: PostProps) {
           </div>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

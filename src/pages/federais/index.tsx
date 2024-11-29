@@ -10,6 +10,7 @@ import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import { CardFederal } from "@/components/federais/CardFederal";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 const GET_ALL_FEDERAIS = gql`
   query GetAllFederais {
@@ -131,6 +132,7 @@ export default function Home({ federais }: AllFederais) {
           )}
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );
