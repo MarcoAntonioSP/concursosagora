@@ -129,14 +129,14 @@ export default function Footer() {
                 Política de Privacidade
               </a>
             </li>
-            {/* <li>
+            <li>
               <a
-                href="/termos-uso"
+                href="/diretrizeseditoriais"
                 className="hover:text-blue-400 transition-colors"
               >
-                Termos de Uso
+                Diretrizes Editoriais
               </a>
-            </li> */}
+            </li>
             <li>
               <a
                 href="/contato"
