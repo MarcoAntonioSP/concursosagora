@@ -12,12 +12,11 @@ export default function DiretrizesEditoriais() {
           </h1>
 
           <p className="text-gray-700 mb-4">
-            No portal <strong>Concursos Agora ®</strong>, a integridade em
-            cada notícia e a responsabilidade em cada publicação são os
-            pilares que sustentam nosso trabalho. Desde nossa fundação, temos
-            o compromisso de fazer a diferença no jornalismo de serviço,
-            oferecendo informações de qualidade aos concurseiros em todo o
-            país.
+            No portal <strong>Concursos Agora ®</strong>, a integridade em cada
+            notícia e a responsabilidade em cada publicação são os pilares que
+            sustentam nosso trabalho. Desde nossa fundação, temos o compromisso
+            de fazer a diferença no jornalismo de serviço, oferecendo
+            informações de qualidade aos concurseiros em todo o país.
           </p>
 
           <section className="mb-6">
@@ -82,8 +81,8 @@ export default function DiretrizesEditoriais() {
               </li>
               <li>
                 <strong>Conteúdos educativos:</strong> Abordamos temas
-                relevantes, como língua portuguesa, matemática e legislação,
-                que são frequentemente abordados nas provas.
+                relevantes, como língua portuguesa, matemática e legislação, que
+                são frequentemente abordados nas provas.
               </li>
             </ul>
           </section>
@@ -102,8 +101,8 @@ export default function DiretrizesEditoriais() {
                 todas as informações divulgadas.
               </li>
               <li>
-                <strong>Colaboração:</strong> Um ambiente de trabalho
-                respeitoso e colaborativo entre nossa equipe.
+                <strong>Colaboração:</strong> Um ambiente de trabalho respeitoso
+                e colaborativo entre nossa equipe.
               </li>
               <li>
                 <strong>Responsabilidade:</strong> Compromisso com a precisão
@@ -122,8 +121,8 @@ export default function DiretrizesEditoriais() {
               Conteúdo Publicitário
             </h2>
             <p className="text-gray-700">
-              Nosso portal é mantido por meio de publicidade, mas garantimos
-              que todo conteúdo publicitário é claramente identificado e não
+              Nosso portal é mantido por meio de publicidade, mas garantimos que
+              todo conteúdo publicitário é claramente identificado e não
               interfere na nossa linha editorial. Trabalhamos com plataformas de
               anúncios que respeitam nossas diretrizes e valores.
             </p>
@@ -134,8 +133,8 @@ export default function DiretrizesEditoriais() {
               Contato
             </h2>
             <p className="text-gray-700">
-              Se você tem sugestões, propostas de parceria ou identificou
-              algum erro em nossas publicações, entre em contato pelo e-mail{" "}
+              Se você tem sugestões, propostas de parceria ou identificou algum
+              erro em nossas publicações, entre em contato pelo e-mail{" "}
               <a
                 href="mailto:fale@concursosagora.com.br"
                 className="text-blue-600 underline ml-1"
@@ -178,18 +177,26 @@ export default function DiretrizesEditoriais() {
               </section>
               <section className="mb-6">
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                  2. Responsabilidade do Usuário
+                  2. Isenção de Responsabilidade
                 </h2>
                 <p className="text-gray-700">
                   Embora nos esforcemos para fornecer informações precisas e
-                  atualizadas, o <strong>Concursos Agora</strong> não pode
-                  garantir a total exatidão das informações publicadas, uma vez
-                  que os dados dos concursos estão sujeitos a alterações.
-                  Recomendamos que os candidatos sempre consultem os editais
-                  oficiais e as fontes primárias de informações antes de tomar
-                  qualquer decisão. O acesso e a utilização das informações
-                  fornecidas em nosso portal são de responsabilidade exclusiva
-                  do usuário.
+                  atualizadas, não podemos garantir a total exatidão dos dados
+                  publicados no <strong>Concursos Agora</strong>, uma vez que as
+                  informações sobre os concursos estão sujeitas a alterações. Os
+                  materiais disponibilizados no site são fornecidos "como
+                  estão", sem garantias expressas ou implícitas. Isentamos e
+                  negamos todas as outras garantias, incluindo, sem limitação,
+                  garantias implícitas de comercialização, adequação a um fim
+                  específico ou não violação de propriedade intelectual ou
+                  outros direitos. Recomendamos que os candidatos sempre
+                  consultem os editais oficiais e as fontes primárias de
+                  informações antes de tomar qualquer decisão. Além disso, o
+                   Concursos Agora não garante a precisão, os resultados
+                  prováveis ou a confiabilidade do uso das informações
+                  fornecidas em nosso site ou em sites vinculados a este portal.
+                  O acesso e a utilização das informações são de
+                  responsabilidade exclusiva do usuário.
                 </p>
               </section>
               <section className="mb-6">
@@ -203,8 +210,8 @@ export default function DiretrizesEditoriais() {
                   solicitamos que nos informe imediatamente para que possamos
                   tomar as devidas providências, como a remoção ou correção do
                   material. Valorizamos a transparência e a correção, e estamos
-                  disponíveis para resolver qualquer questão relacionada ao
-                  uso de conteúdo protegido por direitos autorais.
+                  disponíveis para resolver qualquer questão relacionada ao uso
+                  de conteúdo protegido por direitos autorais.
                 </p>
               </section>
             </div>
