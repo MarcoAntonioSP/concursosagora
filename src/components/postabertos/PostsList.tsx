@@ -241,7 +241,7 @@ export default function PostsList() {
   const secondFederal = federaisData?.federais[1];
 
   return (
-    <div className="flex w-full flex-col md:flex-row">
+    <div className="flex w-full sm-mb-96 flex-col md:flex-row">
       <div className="flex w-full text-gray-800 flex-col mt-1 mb-1 space-y-8 p-2">
         {secondPost && (
           <div
@@ -460,7 +460,7 @@ export default function PostsList() {
           </div>
         )}
       </div>
-      <div className="w-full sm:w-3/10 m-1 mb-5 md:mb-72 sticky top-0 mt-10 h-screen">
+      <div className="w-full md:w-3/10 md:mb-96 sm:mb-36 mb-80 sticky md:sticky top-0 mt-10 h-screen">
         <h2 className="text-2xl font-bold text-blue-600 mb-4">
           Como se Preparar para Concursos Públicos 🎓
         </h2>
