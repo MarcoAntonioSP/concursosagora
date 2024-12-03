@@ -10,6 +10,7 @@ interface CardFederalProps {
   createdAt: string;
   urlImage: string;
   slug: string;
+  authorImage?: string; // Adicionei authorImage como opcional
 }
 
 export function CardFederal({
@@ -19,6 +20,7 @@ export function CardFederal({
   title,
   urlImage,
   slug,
+  authorImage,
 }: CardFederalProps) {
   return (
     <Link
@@ -28,7 +30,7 @@ export function CardFederal({
       <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
         <Image
           src={urlImage}
-          alt=""
+          alt={title}
           fill={true}
           style={{ objectFit: "cover" }}
         />
@@ -42,15 +44,26 @@ export function CardFederal({
           {subtitle}
         </p>
 
-        <div>
-          <p className="font-bold text-zinc-900 text-sm md:text-base">
-            {author}
-          </p>
-          <p className="text-zinc-600 text-xs md:text-sm">
-            {format(new Date(createdAt), "dd 'de' MMM 'de' yyyy", {
-              locale: ptBR,
-            })}
-          </p>
+        <div className="w-full flex items-center mt-2 gap-2">
+          {authorImage && (
+            <Image
+              src={authorImage}
+              alt={`Foto do autor ${author}`}
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+          )}
+          <div>
+            <p className="font-bold text-zinc-900 text-sm md:text-base">
+              {author}
+            </p>
+            <p className="text-zinc-600 text-xs md:text-sm">
+              {format(new Date(createdAt), "dd 'de' MMM 'de' yyyy", {
+                locale: ptBR,
+              })}
+            </p>
+          </div>
         </div>
       </div>
     </Link>

@@ -23,6 +23,9 @@ const GET_ALL_FEDERAIS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -42,6 +45,9 @@ interface AllFederais {
     contentFederal: string;
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -95,6 +101,15 @@ export default function Home({ federais }: AllFederais) {
                 {federais[0].subtitlefederal}
               </p>
               <div>
+              {federais[0].author.coverImageAuthor?.url && (
+                  <Image
+                    src={federais[0].author.coverImageAuthor.url}
+                    alt={federais[0].author.name}
+                    width={50}
+                    height={50}
+                    className="rounded-full mr-2"
+                  />
+                )}
                 <p className="font-bold text-zinc-900 text-sm md:text-base">
                   {federais[0].author.name}
                 </p>
@@ -118,11 +133,9 @@ export default function Home({ federais }: AllFederais) {
                   key={federal.id}
                   title={federal.titlefederal}
                   subtitle={federal.subtitlefederal}
+                  authorImage={federal.author.coverImageAuthor?.url || ""}
                   createdAt={federal.createdAt}
-                  urlImage={
-                    federal.federalCoverImage?.url ||
-                    "/path/to/default/image.jpg"
-                  }
+                  urlImage={federal.federalCoverImage?.url}
                   slug={federal.slugfederal}
                   author={federal.author.name}
                 />

@@ -24,6 +24,9 @@ const GET_ALL_NOTICIAS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -33,14 +36,17 @@ const GET_ALL_NOTICIAS = gql`
 interface Noticia {
   id: string;
   slugnoticia: string;
-  titlenoticia: string;
   subtitlenoticia: string;
+  titlenoticia: string;
   createdAt: string;
-  noticiaCoverImage: {
+  noticiaCoverImage?: {
     url: string;
   };
   author: {
     name: string;
+    coverImageAuthor?: {
+      url: string;
+    };
   };
 }
 
@@ -78,19 +84,6 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
             href={`/noticia/${noticias[0].slugnoticia}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
-            <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
-              <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
-                {noticias[0].titlenoticia}
-              </h1>
-              <div></div>
-            </div>
-          </Link>
-        )}
-        {noticias.length > 0 && (
-          <Link
-            href={`/noticia/${noticias[0].slugnoticia}`}
-            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
-          >
             <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
               {noticias[0].noticiaCoverImage ? (
                 <Image
@@ -113,6 +106,15 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
                 {noticias[0].subtitlenoticia}
               </p>
               <div>
+                {noticias[0].author.coverImageAuthor?.url && (
+                  <Image
+                    src={noticias[0].author.coverImageAuthor.url}
+                    alt={noticias[0].author.name}
+                    width={50}
+                    height={50}
+                    className="rounded-full mr-2"
+                  />
+                )}
                 <p className="font-bold text-zinc-900 text-sm md:text-base">
                   {noticias[0].author.name}
                 </p>
@@ -127,24 +129,21 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
             </div>
           </Link>
         )}
+
         <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
           {noticias.length > 0 ? (
-            noticias
-              .slice(1)
-              .map((noticia) => (
-                <CardNoticias
-                  key={noticia.id}
-                  title={noticia.titlenoticia}
-                  subtitle={noticia.subtitlenoticia}
-                  createdAt={noticia.createdAt}
-                  urlImage={
-                    noticia.noticiaCoverImage?.url ||
-                    "/path/to/default/image.jpg"
-                  }
-                  slug={noticia.slugnoticia}
-                  author={noticia.author.name}
-                />
-              ))
+            noticias.slice(1).map((noticia) => (
+              <CardNoticias
+                key={noticia.id}
+                title={noticia.titlenoticia}
+                subtitle={noticia.subtitlenoticia}
+                authorImage={noticia.author.coverImageAuthor?.url || ""}
+                createdAt={noticia.createdAt}
+                urlImage={noticia.noticiaCoverImage?.url ?? ""}
+                slug={noticia.slugnoticia}
+                author={noticia.author.name}
+              />
+            ))
           ) : (
             <Empty />
           )}
