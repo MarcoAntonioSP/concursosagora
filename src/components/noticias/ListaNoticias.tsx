@@ -12,6 +12,9 @@ interface Noticia {
   };
   author: {
     name: string;
+    coverImageAuthor?: {
+      url: string;
+    };
   };
 }
 
@@ -28,8 +31,9 @@ export const ListaNoticias: React.FC<ListaNoticiasProps> = ({ noticias }) => {
             key={noticia.id}
             title={noticia.titlenoticia}
             subtitle={noticia.subtitlenoticia}
+            authorImage={noticia.author.coverImageAuthor?.url || ""}
             createdAt={noticia.createdAt}
-            urlImage={noticia.noticiaCoverImage?.url || '/path/to/default/image.jpg'}
+            urlImage={noticia.noticiaCoverImage?.url ?? ""}
             slug={noticia.slugnoticia}
             author={noticia.author.name}
           />

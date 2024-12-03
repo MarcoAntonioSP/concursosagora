@@ -29,10 +29,10 @@ const GET_ALL_POSTS = gql`
         url
       }
       author {
-        name
         coverImageAuthor {
           url
         }
+        name
       }
     }
   }
@@ -51,6 +51,9 @@ const GET_ALL_PREVISTOS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -69,6 +72,9 @@ const GET_ALL_EMPREGOS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -87,6 +93,9 @@ const GET_ALL_NOTICIAS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -104,6 +113,9 @@ const GET_ALL_FEDERAIS = gql`
         url
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
     }
@@ -140,6 +152,9 @@ interface AllPrevistos {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -156,6 +171,9 @@ interface AllEmpregos {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -172,6 +190,9 @@ interface AllNoticias {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -189,6 +210,9 @@ interface AllFederais {
     contentFederal: string;
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
   }[];
 }
@@ -297,20 +321,35 @@ export default function Home({
                 <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
                   {posts[0].subtitle}
                 </p>
-                <div>
-                  <p className="font-bold text-zinc-900 text-sm md:text-base">
-                    {posts[0].title}
-                  </p>
-                  <p className="text-zinc-600 text-xs md:text-sm">
-                    {format(
-                      new Date(posts[0].createdAt),
-                      "dd 'de' MMM 'de' yyyy",
-                      { locale: ptBR }
-                    )}
-                  </p>
+                <div className="flex items-center gap-2">
+                  {/* Foto do autor */}
+                  {posts[0].author.coverImageAuthor?.url && (
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      <Image
+                        src={posts[0].author.coverImageAuthor.url}
+                        alt={posts[0].author.name}
+                        width={40}
+                        height={40}
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <p className="font-bold text-zinc-900 text-sm md:text-base">
+                      {posts[0].author.name}
+                    </p>
+                    <p className="text-zinc-600 text-xs md:text-sm">
+                      {format(
+                        new Date(posts[0].createdAt),
+                        "dd 'de' MMM 'de' yyyy",
+                        { locale: ptBR }
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
             </Link>
+
             <div>
               <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
                 Concursos Abertoss
@@ -322,6 +361,7 @@ export default function Home({
                   key={post.id}
                   title={post.title}
                   author={post.author.name}
+                  authorImage={post.author.coverImageAuthor?.url || ""}
                   createdAt={post.createdAt}
                   subtitle={post.subtitle}
                   urlImage={post.coverImage.url}

@@ -40,8 +40,8 @@ export function CardPost({ author, createdAt, subtitle, title, urlImage, slug, a
             <Image
               src={authorImage}
               alt={author}
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               className="rounded-full mr-2"
             />
           )}

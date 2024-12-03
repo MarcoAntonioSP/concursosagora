@@ -223,7 +223,7 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
             </Link>
 
             <div className="flex flex-col items-center sm:grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 mt-12">
-              {posts.slice(1, 12).map((post) => (
+              {posts.slice(1, 120).map((post) => (
                 <CardPost
                   key={post.id}
                   title={post.title}

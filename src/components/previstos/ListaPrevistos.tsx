@@ -12,8 +12,12 @@ interface Previsto {
   };
   author: {
     name: string;
+    coverImageAuthor?: {
+      url: string;
+    };
   };
 }
+
 
 interface ListaPrevistosProps {
   previstos: Previsto[];
@@ -28,6 +32,7 @@ export const ListaPrevistos: React.FC<ListaPrevistosProps> = ({ previstos }) => 
             key={previsto.id}
             title={previsto.titleprevisto}
             subtitle={previsto.subtitleprevisto}
+            authorImage={previsto.author.coverImageAuthor?.url || ""}
             createdAt={previsto.createdAt}
             urlImage={previsto.previstoCoverImage?.url || '/path/to/default/image.jpg'} // URL de imagem padrão
             slug={previsto.slugprevisto}

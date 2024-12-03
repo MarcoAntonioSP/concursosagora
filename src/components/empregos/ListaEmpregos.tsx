@@ -12,6 +12,9 @@ interface Emprego {
   };
   author: {
     name: string;
+    coverImageAuthor?: {
+      url: string;
+    };
   };
 }
 
@@ -25,14 +28,15 @@ export const ListaEmpregos: React.FC<ListaEmpregosProps> = ({ empregos }) => {
       {empregos.length > 0 ? (
         empregos.map((emprego) => (
           <CardEmprego
-            key={emprego.id}
-            title={emprego.titleemprego}
-            subtitle={emprego.subtitlemprego}
-            createdAt={emprego.createdAt}
-            urlImage={emprego.empregoCoverImage?.url || '/path/to/default/image.jpg'}
-            slug={emprego.slugemprego}
-            author={emprego.author.name}
-          />
+                key={emprego.id}
+                title={emprego.titleemprego}
+                subtitle={emprego.subtitlemprego}
+                createdAt={emprego.createdAt}
+                urlImage={emprego.empregoCoverImage?.url || "/path/to/default/image.jpg"} // Imagem padrão
+                slug={emprego.slugemprego}
+                author={emprego.author.name}
+                authorImage={emprego.author.coverImageAuthor?.url}
+              />
         ))
       ) : (
         <Empty />

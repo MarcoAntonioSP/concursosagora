@@ -49,8 +49,8 @@ export function CardFederal({
             <Image
               src={authorImage}
               alt={`Foto do autor ${author}`}
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               className="rounded-full"
             />
           )}

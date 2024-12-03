@@ -12,6 +12,9 @@ interface Federal {
   };
   author: {
     name: string;
+    coverImageAuthor?: {
+      url: string;
+    };
   };
 }
 
@@ -28,8 +31,9 @@ export const ListaFederais: React.FC<ListaFederaisProps> = ({ federais }) => {
             key={federal.id}
             title={federal.titlefederal}
             subtitle={federal.subtitlefederal}
+            authorImage={federal.author.coverImageAuthor?.url}
             createdAt={federal.createdAt}
-            urlImage={federal.federalCoverImage?.url || '/path/to/default/image.jpg'}
+            urlImage={federal.federalCoverImage?.url || 'default_image_url'}  // Provide a default value here
             slug={federal.slugfederal}
             author={federal.author.name}
           />
