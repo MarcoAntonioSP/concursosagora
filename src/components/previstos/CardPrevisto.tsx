@@ -24,7 +24,7 @@ export function CardPrevisto({
   authorImage,
 }: CardPrevistoProps) {
   const [ref, isVisible] = useIntersectionObserver({
-    threshold: 0.1, // 10% visível para ativar
+    threshold: 0.3, // 30% visível para ativar
     triggerOnce: true, // Apenas uma vez
   });
 

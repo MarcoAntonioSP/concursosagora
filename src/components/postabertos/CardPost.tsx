@@ -24,7 +24,7 @@ export function CardPost({
   authorImage,
 }: CardPostProps) {
   const [ref, isVisible] = useIntersectionObserver({
-    threshold: 0.1, // 10% do elemento visível para ativar
+    threshold: 0.3, // 30% do elemento visível para ativar
     triggerOnce: true, // Executa uma vez ao entrar na viewport
   });
 

@@ -19,7 +19,7 @@ export function CardNoticias({ author, createdAt, subtitle, title, urlImage, slu
 
   // Usar o hook para detectar visibilidade
   const [ref, isVisible] = useIntersectionObserver({
-    threshold: 0.1, // 10% visível
+    threshold: 0.3, // 30% visível
     triggerOnce: true, // Apenas uma vez
   });
 

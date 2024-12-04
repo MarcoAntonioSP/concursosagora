@@ -16,7 +16,7 @@ interface CardEmpregoProps {
 
 export function CardEmprego({ author, createdAt, subtitle, title, urlImage, slug, authorImage }: CardEmpregoProps) {
   const [ref, isVisible] = useIntersectionObserver({
-    threshold: 0.1, // Ativa quando 10% do elemento está visível
+    threshold: 0.3, // Ativa quando 30% do elemento está visível
     triggerOnce: true, // Executa apenas uma vez
   });
 

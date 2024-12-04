@@ -1,35 +1,40 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 
-const useIntersectionObserver = (options: IntersectionObserverInit & { triggerOnce?: boolean }) => {
+interface IntersectionObserverArgs {
+  threshold?: number;
+  root?: Element | null;
+  rootMargin?: string;
+  triggerOnce?: boolean;
+}
+
+function useIntersectionObserver({
+  threshold = 0.5,
+  root = null,
+  rootMargin = "0px",
+  triggerOnce = true,
+}: IntersectionObserverArgs) {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
+    if (!ref.current || (triggerOnce && isVisible)) return;
 
-        // Se `triggerOnce` for verdadeiro, desconecta o observer após a primeira interseção
-        if (options.triggerOnce && ref.current) {
-          observer.unobserve(ref.current);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce) observer.disconnect();
         }
-      } else if (!options.triggerOnce) {
-        setIsVisible(false);
-      }
-    }, options);
+      },
+      { threshold, root, rootMargin }
+    );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(ref.current);
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [options]);
+    return () => observer.disconnect();
+  }, [ref, isVisible, root, rootMargin, threshold, triggerOnce]);
 
   return [ref, isVisible] as const;
-};
+}
 
 export default useIntersectionObserver;

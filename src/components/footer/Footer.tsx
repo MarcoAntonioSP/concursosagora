@@ -1,11 +1,32 @@
 import Image from "next/image";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 export default function Footer() {
+  const [refSocial, isVisibleSocial] = useIntersectionObserver({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+  const [refNav, isVisibleNav] = useIntersectionObserver({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+  const [refLegal, isVisibleLegal] = useIntersectionObserver({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+
   return (
     <footer className="w-full mt-5 p-8 bg-gray-800 text-white">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {/* Redes Sociais */}
-        <div className="flex flex-col items-center sm:items-start">
+        <div
+          className={`flex flex-col items-center sm:items-start ${
+            isVisibleSocial
+              ? "opacity-100 animate-fade-right animate-once animate-duration-[2000ms] animate-ease-out animate-normal animate-fill-backwards"
+              : "opacity-0"
+          }`}
+          ref={refSocial}
+        >
           <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">
             Redes Sociais
           </h3>
@@ -70,7 +91,14 @@ export default function Footer() {
         </div>
 
         {/* Navegação */}
-        <div className="flex flex-col items-center sm:items-start">
+        <div
+          className={`flex flex-col items-center sm:items-start ${
+            isVisibleNav
+              ? "opacity-100 animate-fade-up animate-once animate-duration-[2000ms] animate-ease-out animate-normal animate-fill-backwards"
+              : "opacity-0"
+          }`}
+          ref={refNav}
+        >
           <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">
             Navegação
           </h3>
@@ -81,34 +109,22 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href="/abertos"
-                className="hover:text-blue-400 transition-colors"
-              >
+              <a href="/abertos" className="hover:text-blue-400 transition-colors">
                 Vagas Abertas
               </a>
             </li>
             <li>
-              <a
-                href="/previstos"
-                className="hover:text-blue-400 transition-colors"
-              >
+              <a href="/previstos" className="hover:text-blue-400 transition-colors">
                 Vagas Previstas
               </a>
             </li>
             <li>
-              <a
-                href="/empregos"
-                className="hover:text-blue-400 transition-colors"
-              >
+              <a href="/empregos" className="hover:text-blue-400 transition-colors">
                 Empregos
               </a>
             </li>
             <li>
-              <a
-                href="/sobre"
-                className="hover:text-blue-400 transition-colors"
-              >
+              <a href="/sobre" className="hover:text-blue-400 transition-colors">
                 Sobre Nós
               </a>
             </li>
@@ -116,7 +132,14 @@ export default function Footer() {
         </div>
 
         {/* Informações Legais */}
-        <div className="flex flex-col items-center sm:items-start">
+        <div
+          className={`flex flex-col items-center sm:items-start ${
+            isVisibleLegal
+              ? "opacity-100 animate-fade-left animate-once animate-duration-[2000ms] animate-ease-out animate-normal animate-fill-backwards"
+              : "opacity-0"
+          }`}
+          ref={refLegal}
+        >
           <h3 className="font-bold text-blue-400 mb-4 text-lg text-center sm:text-left">
             Informações Legais
           </h3>
@@ -138,21 +161,10 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href="/contato"
-                className="hover:text-blue-400 transition-colors"
-              >
+              <a href="/contato" className="hover:text-blue-400 transition-colors">
                 Fale Conosco
               </a>
             </li>
-            {/* <li>
-              <a
-                href="/anuncie"
-                className="hover:text-blue-400 transition-colors"
-              >
-                Anuncie no Concursos Agora
-              </a>
-            </li> */}
           </ul>
         </div>
       </div>
