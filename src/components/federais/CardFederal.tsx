@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 interface CardFederalProps {
   title: string;
@@ -10,7 +11,7 @@ interface CardFederalProps {
   createdAt: string;
   urlImage: string;
   slug: string;
-  authorImage?: string; // Adicionei authorImage como opcional
+  authorImage?: string;
 }
 
 export function CardFederal({
@@ -22,10 +23,21 @@ export function CardFederal({
   slug,
   authorImage,
 }: CardFederalProps) {
+  const [ref, isVisible] = useIntersectionObserver({
+    threshold: 0.1, // 10% do elemento visível para ativar
+    triggerOnce: true, // Executa apenas uma vez
+  });
+
   return (
     <Link
       href={`/federal/${slug}`}
-      className="w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all"
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all 
+        transition-opacity duration-500 ${
+          isVisible
+            ? "opacity-100 animate-fade-up animate-once animate-duration-1000"
+            : "opacity-0"
+        }`}
+      ref={ref as any}
     >
       <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
         <Image

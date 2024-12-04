@@ -300,7 +300,6 @@ export default function Home({
                 </div>
               </Link>
             )}
-
             <Link
               href={`/aberto/${posts[0].slug}`}
               className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-1 hover:brightness-75 transition-all"
@@ -349,11 +348,12 @@ export default function Home({
                 </div>
               </div>
             </Link>
-
             <div>
-              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
-                Concursos Abertoss
-              </h2>
+              <Link href="/abertos">
+                <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
+                  Concursos Abertos
+                </h2>
+              </Link>
             </div>
             <div className="flex flex-col items-center sm:grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 mt-12">
               {posts.slice(1, 4).map((post) => (
@@ -369,28 +369,37 @@ export default function Home({
                 />
               ))}
             </div>
+            import Link from 'next/link';
             <div>
-              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
-                Próximos Concursos
-              </h2>
+              <Link href="/previstos">
+                <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
+                  Próximos Concursos
+                </h2>
+              </Link>
               <ListaPrevistos previstos={previstos.slice(0, 3)} />
             </div>
             <div>
-              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
-                Oportunidades de Emprego
-              </h2>
+              <Link href="/empregos">
+                <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
+                  Oportunidades de Emprego
+                </h2>
+              </Link>
               <ListaEmpregos empregos={empregos.slice(0, 3)} />
             </div>
             <div>
-              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
-                Noticias
-              </h2>
+              <Link href="/noticias">
+                <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
+                  Notícias
+                </h2>
+              </Link>
               <ListaNoticias noticias={noticias.slice(0, 3)} />
             </div>
             <div>
-              <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5">
-                Federais
-              </h2>
+              <Link href="/federais">
+                <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
+                  Federais
+                </h2>
+              </Link>
               <ListaFederais federais={federais.slice(0, 3)} />
             </div>
           </>

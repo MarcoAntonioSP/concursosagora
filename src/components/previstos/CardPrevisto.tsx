@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 interface CardPrevistoProps {
   title: string;
@@ -10,7 +11,7 @@ interface CardPrevistoProps {
   createdAt: string;
   urlImage: string;
   slug: string;
-  authorImage?: string; // Adicionando authorImage como opcional
+  authorImage?: string;
 }
 
 export function CardPrevisto({
@@ -22,17 +23,28 @@ export function CardPrevisto({
   slug,
   authorImage,
 }: CardPrevistoProps) {
+  const [ref, isVisible] = useIntersectionObserver({
+    threshold: 0.1, // 10% visível para ativar
+    triggerOnce: true, // Apenas uma vez
+  });
+
   return (
     <Link
       href={`/previsto/${slug}`}
-      className="w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all"
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
+        hover:brightness-75 transition-all duration-500 ${
+          isVisible
+            ? 'animate-fade-up animate-once animate-duration-1000 animate-ease-in-out animate-normal animate-fill-forwards'
+            : 'opacity-0'
+        }`}
+      ref={ref as any}
     >
       <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
         <Image
           src={urlImage}
           alt={title}
           fill={true}
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: 'cover' }}
         />
       </div>
 

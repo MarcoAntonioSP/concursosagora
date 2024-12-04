@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format, isValid } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { MutableRefObject, useRef, useEffect } from 'react';
 
 interface CardNoticiasProps {
   title: string;
@@ -16,8 +18,33 @@ interface CardNoticiasProps {
 export function CardNoticias({ author, createdAt, subtitle, title, urlImage, slug, authorImage }: CardNoticiasProps) {
   const date = new Date(createdAt);
 
+  // Usar o hook para detectar visibilidade
+  const [observedRef, isVisible] = useIntersectionObserver({
+    threshold: 0.1, // 10% visível
+    triggerOnce: true, // Apenas uma vez
+  });
+
+  // Usar ref do React
+  const linkRef = useRef<HTMLAnchorElement | null>(null);
+
+  // Sincroniza o linkRef com observedRef
+  useEffect(() => {
+    if (linkRef.current) {
+      observedRef.current = linkRef.current;
+    }
+  }, [observedRef]);
+
   return (
-    <Link href={`/noticia/${slug}`} className="w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all">
+    <Link
+      href={`/noticia/${slug}`}
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
+        transition-all duration-500 ${
+          isVisible
+            ? 'animate-fade-up animate-once animate-duration-1000 animate-ease-in-out animate-normal animate-fill-forwards'
+            : 'opacity-0'
+        }`}
+      ref={linkRef} // Atribui o ref do React
+    >
       <div>
         {/* Conteúdo do link */}
         <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
@@ -25,7 +52,7 @@ export function CardNoticias({ author, createdAt, subtitle, title, urlImage, slu
             src={urlImage}
             alt={title}
             fill={true}
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: 'cover' }}
           />
         </div>
 
