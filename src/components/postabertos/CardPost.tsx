@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
+import { ptBR } from "date-fns/locale";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import 'animate.css';
 
 interface CardPostProps {
   title: string;
@@ -32,9 +33,7 @@ export function CardPost({
     <div
       className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
         transition-opacity duration-500 ${
-          isVisible
-            ? "opacity-100 animate-fade-up animate-once animate-duration-1000"
-            : "opacity-0"
+          isVisible ? "opacity-100 animate__animated animate__zoomInDown" : "opacity-0"
         }`}
       ref={ref as any}
     >

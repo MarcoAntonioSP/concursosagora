@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
+import { ptBR } from "date-fns/locale";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import 'animate.css';
 
 interface CardFederalProps {
   title: string;
@@ -31,12 +32,9 @@ export function CardFederal({
   return (
     <Link
       href={`/federal/${slug}`}
-      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all 
-        transition-opacity duration-500 ${
-          isVisible
-            ? "opacity-100 animate-fade-up animate-once animate-duration-1000"
-            : "opacity-0"
-        }`}
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-opacity duration-500 ${
+        isVisible ? "opacity-100 animate__animated animate__zoomInDown" : "opacity-0"
+      }`}
       ref={ref as any}
     >
       <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
@@ -49,10 +47,10 @@ export function CardFederal({
       </div>
 
       <div className="flex w-full flex-1 flex-col justify-between gap-1 sm:gap-2">
-        <h1 className="font-bold text-lg sm:text-xl text-blue-600 clamp-2">
+        <h1 className="font-bold text-lg sm:text-xl text-blue-600 line-clamp-2">
           {title}
         </h1>
-        <p className="text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm clamp-3">
+        <p className="text-zinc-600 hidden md:flex flex-1 text-justify lg:text-left text-sm line-clamp-3">
           {subtitle}
         </p>
 

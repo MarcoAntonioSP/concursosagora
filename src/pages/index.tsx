@@ -12,7 +12,6 @@ import { ListaPrevistos } from "@/components/previstos/ListaPrevistos";
 import { ListaEmpregos } from "@/components/empregos/ListaEmpregos";
 import Footer from "@/components/footer/Footer";
 import Empty from "@/components/Empty";
-import FeaturedArticle from "@/components/FeaturedArticle/FeaturedArticle";
 import { ListaNoticias } from "@/components/noticias/ListaNoticias";
 import { ListaFederais } from "@/components/federais/ListaFederal";
 

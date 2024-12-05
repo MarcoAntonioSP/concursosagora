@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import { ptBR } from 'date-fns/locale';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import 'animate.css';
 
 interface CardPrevistoProps {
   title: string;
@@ -32,10 +33,8 @@ export function CardPrevisto({
     <Link
       href={`/previsto/${slug}`}
       className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
-        hover:brightness-75 transition-all duration-500 ${
-          isVisible
-            ? 'animate-fade-up animate-once animate-duration-1000 animate-ease-in-out animate-normal animate-fill-forwards'
-            : 'opacity-0'
+        hover:brightness-75 transition-opacity duration-500 ${
+          isVisible ? 'opacity-100 animate__animated animate__zoomInDown' : 'opacity-0'
         }`}
       ref={ref as any}
     >

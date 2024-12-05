@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { format, isValid } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import { ptBR } from 'date-fns/locale';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import 'animate.css';
 
 interface CardNoticiasProps {
   title: string;
@@ -26,12 +27,9 @@ export function CardNoticias({ author, createdAt, subtitle, title, urlImage, slu
   return (
     <Link
       href={`/noticia/${slug}`}
-      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all 
-        transition-opacity duration-500 ${
-          isVisible
-            ? 'opacity-100 animate-fade-up animate-once animate-duration-1000'
-            : 'opacity-0'
-        }`}
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-opacity duration-500 ${
+        isVisible ? 'opacity-100 animate__animated animate__zoomInDown' : 'opacity-0'
+      }`}
       ref={ref as any}
     >
       <div>

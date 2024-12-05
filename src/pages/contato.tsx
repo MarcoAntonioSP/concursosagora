@@ -55,7 +55,7 @@ export default function Contato() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col gap-8 w-full">
+      <div className="flex flex-col mt-5 gap-8 w-full">
         <div className="text-center py-10 bg-gray-100 rounded-lg">
           <h1 className="text-3xl font-bold text-gray-800">Entre em contato</h1>
           <p className="text-lg text-gray-500 mt-2">
