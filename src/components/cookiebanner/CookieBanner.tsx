@@ -1,27 +1,32 @@
-// components/CookieBanner.js
-import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+// components/CookieBanner.tsx
+import { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
-export default function CookieBanner() {
-  const [showBanner, setShowBanner] = useState(true);
+// Defina as props esperadas
+interface CookieBannerProps {
+  onConsent: (consent: boolean) => void;
+}
+
+const CookieBanner = ({ onConsent }: CookieBannerProps) => {
+  const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
-    // Verifica se o usuário já deu consentimento anteriormente
-    const userConsent = localStorage.getItem('cookieConsent');
+    const userConsent = localStorage.getItem('cookieConsent')
     if (userConsent) {
-      setShowBanner(false);
+      setShowBanner(false)
+      onConsent(true) // Chame a função de consentimento logo que souber que o consentimento foi dado
     }
-  }, []);
+  }, [onConsent])
 
   const handleAccept = () => {
-    // Grava o consentimento no localStorage para lembrar em visitas futuras
-    localStorage.setItem('cookieConsent', 'true');
-    setShowBanner(false);
-  };
+    localStorage.setItem('cookieConsent', 'true')
+    onConsent(true)  // Chame a função de consentimento
+    setShowBanner(false)
+  }
 
   if (!showBanner) {
-    return null;
+    return null
   }
 
   return (
@@ -36,5 +41,7 @@ export default function CookieBanner() {
         Aceitar Cookies
       </button>
     </div>
-  );
+  )
 }
+
+export default CookieBanner
