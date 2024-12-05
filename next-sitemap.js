@@ -4,4 +4,4 @@ module.exports = {
     sitemapSize: 7000,  // Defina o número de URLs por sitemap, se necessário
     changefreq: 'daily',  // Frequência de atualização das páginas
     priority: 0.7,  // Prioridade de indexação das páginas
-  }  
+  }  git a
