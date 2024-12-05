@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { format, isValid } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import { ptBR } from 'date-fns/locale';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import 'animate.css';
 
 interface CardEmpregoProps {
   title: string;
@@ -25,11 +26,9 @@ export function CardEmprego({ author, createdAt, subtitle, title, urlImage, slug
   return (
     <Link
       href={`/emprego/${slug}`}
-      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-alltransition-opacity duration-500 ${
-          isVisible
-            ? "opacity-100 animate-fade-up animate-zoomInDown animate-duration-1000"
-            : "opacity-0"
-        }`}
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-opacity duration-500 ${
+        isVisible ? "opacity-100 animate__animated animate__zoomInDown" : "opacity-0"
+      }`}
       ref={ref as any}
     >
       <div className="flex w-full h-[200px] sm:h-[234px] relative overflow-hidden">
