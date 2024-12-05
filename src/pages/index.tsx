@@ -248,11 +248,6 @@ export default function Home({
           property="og:description"
           content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais."
         />
-        <meta
-          property="og:image"
-          content="https://www.concursosagora.com.br/images/og-image.jpg"
-        />
-
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -267,11 +262,6 @@ export default function Home({
           property="twitter:description"
           content="Encontre todas as informações atualizadas sobre concursos públicos e oportunidades de emprego no Brasil. Acompanhe os últimos editais, inscrições e muito mais."
         />
-        <meta
-          property="twitter:image"
-          content="https://www.concursosagora.com.br/images/twitter-image.jpg"
-        />
-
         {/* Additional Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="ConcursosAgora" />

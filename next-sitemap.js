@@ -5,4 +5,4 @@ module.exports = {
     changefreq: 'daily',  // Frequência de atualização das páginas
     priority: 0.7,  // Prioridade de indexação das páginas
   }
-  
+git add  

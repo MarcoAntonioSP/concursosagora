@@ -81,8 +81,9 @@ export default function Post({ post }: PostProps) {
         <title>{post.title} | Concursos Agora</title>
         <meta name="description" content={post.subtitle} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="UTF-8" />
+        <meta name="robots" content="index, follow" />
       </Head>
-
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Header />
 
@@ -272,7 +273,7 @@ export default function Post({ post }: PostProps) {
                     if (!src) {
                       return <></>; // Retorna um fragmento vazio em vez de null
                     }
-                    return                     (
+                    return (
                       <div className="my-4">
                         <Image
                           src={src}

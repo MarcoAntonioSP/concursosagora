@@ -66,10 +66,13 @@ export default function Noticia({ noticia }: NoticiaProps) {
   return (
     <>
       <Head>
-        <title>{noticia.titlenoticia} | ConcursosAgora Noticias</title>
+        <title>{noticia.titlenoticia} | ConcursosAgora</title>
         <meta name="description" content={noticia.subtitlenoticia} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="UTF-8" />
+        <meta name="robots" content="index, follow" />
       </Head>
+
       <Header />
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Link
