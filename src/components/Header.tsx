@@ -38,7 +38,7 @@ export function Header() {
     <header className="w-full h-10  flex items-center">
       <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 transition-all duration-300 ease-in-out bg-opacity-100">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1 ">
-          <Link href="/" className="flex mt-5 items-center space-x-1 animate-bounce animate-thrice animate-ease-linear animate-normal animate-fill-forwards">
+          <Link href="/" className="flex mt-5 items-center space-x-1 animate-bounce animate-thrice animate-ease-linear animate-normal animate-fill-forwards animate-jiggle">
             <Image
               src="/logo.png"
               alt="Concursos Agora Logo"

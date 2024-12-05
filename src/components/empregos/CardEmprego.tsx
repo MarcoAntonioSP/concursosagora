@@ -25,10 +25,9 @@ export function CardEmprego({ author, createdAt, subtitle, title, urlImage, slug
   return (
     <Link
       href={`/emprego/${slug}`}
-      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-all 
-        transition-opacity duration-500 ${
+      className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 hover:brightness-75 transition-alltransition-opacity duration-500 ${
           isVisible
-            ? "opacity-100 animate-fade-up animate-once animate-duration-1000"
+            ? "opacity-100 animate-fade-up animate-zoomInDown animate-duration-1000"
             : "opacity-0"
         }`}
       ref={ref as any}
