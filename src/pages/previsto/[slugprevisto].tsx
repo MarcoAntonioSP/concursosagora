@@ -78,7 +78,6 @@ export default function Previsto({ previsto }: PrevistoProps) {
         <title>{previsto.titleprevisto} | ConcursosAgora Concursos</title>
         <meta name="description" content={previsto.subtitleprevisto} />
       </Head>
-      <Header />
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Link
           href="/"

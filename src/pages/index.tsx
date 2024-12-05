@@ -239,7 +239,7 @@ export default function Home({
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.ConcursosAgora.com.br/" />
+        <meta property="og:url" content="https://www.concursosagora.com.br/" />
         <meta
           property="og:title"
           content="ConcursosAgora | Concursos Públicos e Empregos no Brasil"
@@ -250,14 +250,14 @@ export default function Home({
         />
         <meta
           property="og:image"
-          content="https://www.concursoscgora.com.br/images/og-image.jpg"
+          content="https://www.concursosagora.com.br/images/og-image.jpg"
         />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content="https://www.concursoscgora.com.br/"
+          content="https://www.concursosagora.com.br/"
         />
         <meta
           property="twitter:title"
@@ -279,6 +279,7 @@ export default function Home({
         <meta property="og:site_name" content="ConcursosAgora" />
         <meta name="twitter:site" content="@concursosagora" />
       </Head>
+
       <div className="w-full max-w-[1120px] flex flex-col mx-auto  pb-6 px-4">
         <Header />
         {posts ? (

@@ -1,20 +1,5 @@
-# Permite que todos os bots acessem todo o site, exceto áreas específicas.
 User-agent: *
+Disallow: /api/
 Disallow: /admin/
-Disallow: /login/
-Disallow: /checkout/
-Disallow: /cart/
-Disallow: /user/
 Allow: /
-
-# Permite que o Googlebot acesse todo o conteúdo
-User-agent: Googlebot
-Allow: /
-
-# Evita que crawlers indexem diretórios temporários ou de dados sensíveis
-Disallow: /tmp/
-Disallow: /private/
-Disallow: /config/
-
-# Sitemap do site (importante para SEO)
 Sitemap: https://www.concursosagora.com.br/sitemap.xml
