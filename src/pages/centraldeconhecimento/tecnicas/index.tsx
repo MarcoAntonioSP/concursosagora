@@ -11,7 +11,6 @@ import { client } from "@/lib/apollo";
 import Empty from "@/components/Empty";
 import { CardTecnicas } from "@/components/tecnicas/CardTecnicas";
 
-
 // Consulta GraphQL ajustada para seu caso
 const GET_ALL_TECNICAS = gql`
   query GetAllTecnicas {
@@ -58,11 +57,54 @@ export default function Home({ tecnicas }: AllTecnicas) {
         <title>ConcursosAgora Técnicas</title>
         <meta name="description" content="Técnicas de Estudo e Preparação" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="técnicas de estudo, preparação para concursos, como estudar"
+        />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://www.concursosagora.com.br/tecnicas"
+        />
+        <meta
+          property="og:title"
+          content="Concursos Agora - Técnicas de Estudo"
+        />
+        <meta
+          property="og:description"
+          content="Descubra as melhores técnicas de estudo para concursos."
+        />
+        <meta
+          property="og:image"
+          content="https://www.concursosagora.com.br/images/og-image.jpg"
+        />
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://www.concursosagora.com.br/tecnicas"
+        />
+        <meta
+          property="twitter:title"
+          content="Concursos Agora - Técnicas de Estudo"
+        />
+        <meta
+          property="twitter:description"
+          content="Descubra as melhores técnicas de estudo para concursos."
+        />
+        <meta
+          property="twitter:image"
+          content="https://www.concursosagora.com.br/images/twitter-image.jpg"
+        />
       </Head>
 
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Header />
-        <Link href="/" className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600">
+        <Link
+          href="/"
+          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
+        >
           Voltar
         </Link>
 
@@ -74,7 +116,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
 
         {tecnicas.length > 0 && (
           <Link
-            href={`/tecnicas/${tecnicas[0].slugtecnica}`}
+            href={`/centraldeconhecimento/tecnica/${tecnicas[0].slugtecnica}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
             <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
@@ -83,7 +125,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
                   src={tecnicas[0].tecnicaCoverImage.url}
                   alt="Imagem de capa"
                   fill={true}
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "contain" }}
                 />
               ) : (
                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -94,16 +136,19 @@ export default function Home({ tecnicas }: AllTecnicas) {
 
             <div className="flex flex-1 h-full flex-col gap-3 lg:gap-6">
               <h1 className="font-bold text-3xl md:text-[40px] text-blue-600 line-clamp-2">
-                {tecnicas[0].slugtecnica}
+                {tecnicas[0].titletecnica}
               </h1>
-              <div>
+              <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
+                {tecnicas[0].slugtecnica}
+              </p>
+              <div className="flex items-center gap-2">
                 {tecnicas[0].author.coverImageAuthor?.url && (
                   <Image
                     src={tecnicas[0].author.coverImageAuthor.url}
                     alt={tecnicas[0].author.name}
-                    width={50}
-                    height={50}
-                    className="rounded-full mr-2"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
                   />
                 )}
                 <p className="font-bold text-zinc-900 text-sm md:text-base">
