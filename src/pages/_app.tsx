@@ -13,54 +13,79 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
+// Defina a função gtag fora do useEffect
+const gtag = (...args: any[]) => {
+  window.dataLayer.push(args);
+};
+
 export default function App({ Component, pageProps }: AppProps) {
-  const [consentGiven, setConsentGiven] = useState(false);
+  const [consentGiven, setConsentGiven] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const consentStatus = localStorage.getItem('cookie-consent');
-    if (consentStatus === 'true') {
-      setConsentGiven(true);
-      consentGrantedAdStorage();
-    } else {
-      // Default consent state when not yet given
-      setDefaultConsentState();
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = gtag;
+
+      window.gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500,
+        'region': ['ES', 'US-AK'],
+      });
+
+      const consentStatus = localStorage.getItem('cookie-consent');
+      if (consentStatus === 'true') {
+        setConsentGiven(true);
+        consentGrantedAdStorage();
+      } else {
+        setConsentGiven(false);
+        setDefaultConsentState();
+      }
     }
   }, []);
 
   const handleConsent = (consent: boolean) => {
-    localStorage.setItem('cookie-consent', String(consent));
-    setConsentGiven(consent);
-    if (consent) {
-      consentGrantedAdStorage();
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', String(consent));
+      setConsentGiven(consent);
+      if (consent) {
+        consentGrantedAdStorage();
+      }
     }
   };
 
-  function consentGrantedAdStorage() {
-    window.gtag('consent', 'update', {
-      'ad_storage': 'granted',
-      'analytics_storage': 'granted',
-      'ad_user_data': 'granted',
-      'ad_personalization': 'granted'
-    });
-  }
+  const consentGrantedAdStorage = () => {
+    if (typeof window !== 'undefined') {
+      window.gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+      });
+    }
+  };
 
-  function setDefaultConsentState() {
-    window.gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'analytics_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'wait_for_update': 500, // Waits 500ms for CMP to update consent
-      'region': ['ES', 'US-AK'] // Spain and Alaska
-    });
-  }
+  const setDefaultConsentState = () => {
+    if (typeof window !== 'undefined') {
+      window.gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500,
+        'region': ['ES', 'US-AK'],
+      });
+    }
+  };
 
   return (
     <ApolloProvider client={client}>
       <main className={`${poppins.variable} font-sans`}>
         <SpeedInsights />
-        
-        {consentGiven && (
+
+        {consentGiven !== null && consentGiven && (
           <>
             <script
               async
@@ -80,7 +105,7 @@ export default function App({ Component, pageProps }: AppProps) {
         )}
 
         <Component {...pageProps} />
-        {!consentGiven && <CookieBanner onConsent={handleConsent} />}
+        {consentGiven !== null && !consentGiven && <CookieBanner onConsent={handleConsent} />}
       </main>
     </ApolloProvider>
   );
