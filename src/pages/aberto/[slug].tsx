@@ -78,7 +78,7 @@ export default function Post({ post }: PostProps) {
   return (
     <>
       <Head>
-        <title>{post.title} | Concursos Agora</title>
+        <title>{post.title}</title>
         <meta name="description" content={post.subtitle} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
@@ -134,7 +134,6 @@ export default function Post({ post }: PostProps) {
               </div>
             </a>
           </Link>
-
           <div className="mt-4 sm:mt-8">
             <RichText
               content={post.content.json}
@@ -179,6 +178,13 @@ export default function Post({ post }: PostProps) {
                     {children}
                   </blockquote>
                 ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
                 code: ({ children }) => (
                   <code className="bg-gray-200 rounded px-1 py-0.5">
                     {children}
@@ -187,7 +193,7 @@ export default function Post({ post }: PostProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio em vez de null
+                    return <></>;
                   }
                   return (
                     <div className="my-4">
@@ -204,7 +210,6 @@ export default function Post({ post }: PostProps) {
               }}
             />
           </div>
-
           {post.coverImage2 && post.coverImage2.url && (
             <div className="w-full h-full flex flex-col mt-8">
               <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">

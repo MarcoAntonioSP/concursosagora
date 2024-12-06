@@ -110,7 +110,6 @@ export default function Noticia({ noticia }: NoticiaProps) {
               })}
             </p>
           </div>
-
           <div className="mt-4 sm:mt-8">
             <RichText
               content={noticia.contentNoticia.json}
@@ -155,6 +154,13 @@ export default function Noticia({ noticia }: NoticiaProps) {
                     {children}
                   </blockquote>
                 ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
                 code: ({ children }) => (
                   <code className="bg-gray-200 rounded px-1 py-0.5">
                     {children}
@@ -163,7 +169,7 @@ export default function Noticia({ noticia }: NoticiaProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio em vez de null
+                    return <></>;
                   }
                   return (
                     <div className="my-4">

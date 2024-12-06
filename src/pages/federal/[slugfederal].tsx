@@ -70,7 +70,7 @@ export default function Federal({ federal }: FederalProps) {
   return (
     <>
       <Head>
-        <title>{federal.titlefederal} | ConcursoAgora Federal</title>
+        <title>{federal.titlefederal}</title>
         <meta name="description" content={federal.subtitlefederal} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -111,7 +111,6 @@ export default function Federal({ federal }: FederalProps) {
               })}
             </p>
           </div>
-
           <div className="mt-4 sm:mt-8">
             <RichText
               content={federal.contentFederal.json}
@@ -156,6 +155,13 @@ export default function Federal({ federal }: FederalProps) {
                     {children}
                   </blockquote>
                 ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
                 code: ({ children }) => (
                   <code className="bg-gray-200 rounded px-1 py-0.5">
                     {children}
@@ -164,7 +170,7 @@ export default function Federal({ federal }: FederalProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio
+                    return <></>;
                   }
                   return (
                     <div className="my-4">

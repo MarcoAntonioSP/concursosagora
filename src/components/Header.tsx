@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'; 
 import Link from "next/link";
 import Image from "next/image";
-import { MenuIcon, XIcon, HomeIcon, LoginIcon, ClockIcon, GlobeIcon, BriefcaseIcon, MailIcon, ChevronDownIcon, AcademicCapIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon, HomeIcon, ClockIcon, BookOpenIcon, BriefcaseIcon, MailIcon, ChevronDownIcon, AcademicCapIcon } from "@heroicons/react/outline";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -132,6 +132,15 @@ export function Header() {
                 >
                   <ClockIcon className="w-5 h-5" />
                   <span>Notícias</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/centraldeconhecimento/tecnicas"
+                  className="flex items-center space-x-2 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-500"
+                >
+                  <BookOpenIcon className="w-5 h-5" />
+                  <span>Tecnicas de Estudo</span>
                 </Link>
               </li>
               <li>

@@ -236,7 +236,6 @@ export default function Home({
           name="keywords"
           content="concursos públicos, empregos, editais, inscrições, vagas, Brasil, oportunidades de emprego"
         />
-
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.concursosagora.com.br/" />
@@ -293,7 +292,7 @@ export default function Home({
             <Link
               href={`/aberto/${posts[0].slug}`}
               className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-1 hover:brightness-75 transition-all"
-            >
+             style={{marginTop: '-40px'}}>
               <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
                 <Image
                   src={posts[0].coverImage.url}

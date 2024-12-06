@@ -68,7 +68,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
   return (
     <>
       <Head>
-        <title>{previsto.titleprevisto} | ConcursosAgora Concursos</title>
+        <title>{previsto.titleprevisto}</title>
         <meta name="description" content={previsto.subtitleprevisto} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
@@ -116,7 +116,6 @@ export default function Previsto({ previsto }: PrevistoProps) {
               })}
             </p>
           </div>
-
           <div className="mt-4 sm:mt-8">
             <RichText
               content={previsto.contentPrevisto.json}
@@ -161,6 +160,13 @@ export default function Previsto({ previsto }: PrevistoProps) {
                     {children}
                   </blockquote>
                 ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
                 code: ({ children }) => (
                   <code className="bg-gray-200 rounded px-1 py-0.5">
                     {children}
@@ -169,10 +175,10 @@ export default function Previsto({ previsto }: PrevistoProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio em vez de null
+                    return <></>;
                   }
                   return (
-                    <div className="my-6  align-middle justify-center">
+                    <div className="my-4">
                       <Image
                         src={src}
                         alt={alt}
@@ -193,7 +199,6 @@ export default function Previsto({ previsto }: PrevistoProps) {
     </>
   );
 }
-
 // Get Static Props: fetch data for the specific "previsto"
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const slug = ctx.params?.slugprevisto;
@@ -207,7 +212,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     if (!data || !data.previsto) {
       return { notFound: true };
     }
-
     return {
       props: { previsto: data.previsto },
       revalidate: 60 * 30, // 30 minutos
@@ -217,19 +221,16 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     return { notFound: true };
   }
 };
-
 // Get Static Paths: generate the paths for the slugs
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
     const { data } = await client.query({
       query: GET_PREVISTOS_SLUGS,
     });
-
     const paths =
       data?.previstos.map((previsto: { slugprevisto: string }) => ({
         params: { slugprevisto: previsto.slugprevisto },
       })) || [];
-
     return {
       paths,
       fallback: "blocking",
