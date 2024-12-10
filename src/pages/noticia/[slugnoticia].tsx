@@ -144,7 +144,7 @@ export default function Noticia({ noticia }: NoticiaProps) {
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500 my-4">
                     {children}
                   </h3>
                 ),

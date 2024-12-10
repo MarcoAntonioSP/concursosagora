@@ -27,10 +27,11 @@ const GET_EMPREGOS = gql`
         json
       }
       author {
+        name
         coverImageAuthor {
           url
         }
-        name
+        slugauthor
       }
       createdAt
     }
@@ -60,6 +61,7 @@ interface EmpregoProps {
     };
     author: {
       name: string;
+      slugauthor: string;
       coverImageAuthor?: {
         url: string;
       };
@@ -109,7 +111,10 @@ export default function Emprego({ emprego }: EmpregoProps) {
           <h2 className="mt-4 text-xl text-zinc-800">
             {emprego.subtitlemprego}
           </h2>
-          <Link href="/" aria-label="link para perfil do autor">
+          <Link
+            href={`/autores/${emprego.author.slugauthor}`} // Usando slugauthor aqui
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-start mt-12 hover:brightness-75 transition-all"
+          >
             <div className="flex mt-5">
               {emprego.author.coverImageAuthor?.url && (
                 <Image

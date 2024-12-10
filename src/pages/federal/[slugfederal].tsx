@@ -3,8 +3,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { client } from "@/lib/apollo";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+import Image, { ImageProps } from "next/image";
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import Image from "next/image";
 import { Header } from "@/components/Header";
 import Head from "next/head";
 import Link from "next/link";
@@ -30,7 +30,7 @@ const GET_FEDERAL = gql`
         coverImageAuthor {
           url
         }
-          slugauthor
+        slugauthor
       }
       createdAt
     }
@@ -111,8 +111,8 @@ export default function Federal({ federal }: FederalProps) {
             {federal.subtitlefederal}
           </h2>
           <Link
-            href={`/sobre/${federal.author.slugauthor}`} // Usando slugauthor aqui
-            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+            href={`/autores/${federal.author.slugauthor}`} // Usando slugauthor aqui
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-start mt-12 hover:brightness-75 transition-all"
           >
             <div className="flex mt-5">
               {federal.author.coverImageAuthor?.url && (
@@ -153,11 +153,65 @@ export default function Federal({ federal }: FederalProps) {
                     {children}
                   </h2>
                 ),
+                h3: ({ children }) => (
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500 my-4">
+                    {children}
+                  </h3>
+                ),
                 p: ({ children }) => (
-                  <p className="text-zinc-600 text-sm sm:text-base my-2">
+                  <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4">
                     {children}
                   </p>
                 ),
+                ul: ({ children }) => (
+                  <ul className="list-disc list-inside ml-4 mb-4">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal list-inside ml-4 mb-4">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="text-zinc-600 text-sm sm:text-base">
+                    {children}
+                  </li>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">
+                    {children}
+                  </blockquote>
+                ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
+                code: ({ children }) => (
+                  <code className="bg-gray-200 rounded px-1 py-0.5">
+                    {children}
+                  </code>
+                ),
+                img: (props: Partial<ImageProps>) => {
+                  const { src, alt = "" } = props;
+                  if (!src) {
+                    return <></>;
+                  }
+                  return (
+                    <div className="my-4">
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={800}
+                        height={450}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  );
+                },
               }}
             />
           </div>

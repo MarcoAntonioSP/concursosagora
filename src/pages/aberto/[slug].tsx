@@ -36,6 +36,7 @@ const GET_POST = gql`
         coverImageAuthor {
           url
         }
+        slugauthor
       }
       createdAt
     }
@@ -62,6 +63,7 @@ interface PostProps {
     };
     author: {
       name: string;
+      slugauthor: string;
       coverImageAuthor?: {
         url: string;
       };
@@ -111,15 +113,18 @@ export default function Post({ post }: PostProps) {
             {post.title}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">{post.subtitle}</h2>
-
-          <Link href="/" aria-label="link para perfil do autor" >
+          <Link
+            href={`/autores/${post.author.slugauthor}`} // Usando slugauthor aqui
+            aria-label="link para perfil do autor"
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+          >
             <div className="w-full flex items-center mt-2">
               {post.author.coverImageAuthor?.url && (
                 <Image
                   src={post.author.coverImageAuthor.url}
                   alt={post.author.name}
-                  width={50}
-                  height={50}
+                  width={70} // Tamanho ajustado para 70
+                  height={70} // Tamanho ajustado para 70
                   className="rounded-full mr-2"
                 />
               )}
@@ -133,6 +138,7 @@ export default function Post({ post }: PostProps) {
               </div>
             </div>
           </Link>
+
           <div className="mt-4 sm:mt-8">
             <RichText
               content={post.content.json}
