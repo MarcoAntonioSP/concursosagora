@@ -27,6 +27,9 @@ const GET_EMPREGOS = gql`
         json
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
       createdAt
@@ -57,6 +60,9 @@ interface EmpregoProps {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
     createdAt: string;
   };
@@ -97,20 +103,37 @@ export default function Emprego({ emprego }: EmpregoProps) {
         </div>
 
         <div className="flex w-full flex-col mt-4 sm:mt-8">
-          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+          <h1 className="font-bold text-center mb-5 text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
             {emprego.titleemprego}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">
             {emprego.subtitlemprego}
           </h2>
-          <div>
-            <p className="font-bold text-zinc-900">{emprego.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(emprego.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
-          </div>
+          <Link href="/" aria-label="link para perfil do autor">
+            <div className="flex mt-5">
+              {emprego.author.coverImageAuthor?.url && (
+                <Image
+                  src={emprego.author.coverImageAuthor.url}
+                  alt={emprego.author.name}
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
+              )}
+              <div>
+                <p className="font-bold text-zinc-900">{emprego.author.name}</p>
+                <p className="text-zinc-600 text-sm">
+                  {format(
+                    new Date(emprego.createdAt),
+                    "dd 'de' MMM 'de' yyyy",
+                    {
+                      locale: ptBR,
+                    }
+                  )}
+                </p>
+              </div>
+            </div>
+          </Link>
 
           <div className="mt-4 sm:mt-8">
             <RichText

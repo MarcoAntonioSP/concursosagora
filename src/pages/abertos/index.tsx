@@ -228,7 +228,6 @@ export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
                   key={post.id}
                   title={post.title}
                   author={post.author.name}
-                  authorImage={post.author.coverImageAuthor?.url || ""}
                   createdAt={post.createdAt}
                   subtitle={post.subtitle}
                   urlImage={post.coverImage.url}

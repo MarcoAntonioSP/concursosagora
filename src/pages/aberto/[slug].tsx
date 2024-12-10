@@ -106,15 +106,14 @@ export default function Post({ post }: PostProps) {
             </div>
           )}
         </div>
-
-        <div className="flex w-full flex-col mt-4 sm:mt-8">
-          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+        <div className="flex w-full flex-col sm:mt-2">
+          <h1 className="font-bold text-2xl text-center mb-5 sm:text-4xl lg:text-[40px] text-blue-600">
             {post.title}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">{post.subtitle}</h2>
 
-          <Link href="/" legacyBehavior>
-            <a className="w-full flex items-center mt-2">
+          <Link href="/" aria-label="link para perfil do autor" >
+            <div className="w-full flex items-center mt-2">
               {post.author.coverImageAuthor?.url && (
                 <Image
                   src={post.author.coverImageAuthor.url}
@@ -132,7 +131,7 @@ export default function Post({ post }: PostProps) {
                   })}
                 </p>
               </div>
-            </a>
+            </div>
           </Link>
           <div className="mt-4 sm:mt-8">
             <RichText
@@ -149,7 +148,7 @@ export default function Post({ post }: PostProps) {
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500 my-4">
                     {children}
                   </h3>
                 ),

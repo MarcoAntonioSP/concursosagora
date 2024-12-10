@@ -18,41 +18,47 @@ const GET_ALL_FEDERAIS = gql`
       id
       slugfederal
       titlefederal
+      subtitlefederal
       createdAt
       federalCoverImage {
         url
       }
       author {
+        name
+        slugauthor
+        id
         coverImageAuthor {
           url
         }
-        name
       }
     }
   }
 `;
 
-interface AllFederais {
-  federais: {
+interface Federal {
+  id: string;
+  slugfederal: string;
+  subtitlefederal: string;
+  titlefederal: string;
+  createdAt: string;
+  federalCoverImage: {
+    url: string;
+  };
+  author: {
+    name: string;
+    slugauthor: string;
     id: string;
-    slugfederal: string;
-    subtitlefederal: string;
-    titlefederal: string;
-    createdAt: string;
-    federalCoverImage: {
+    coverImageAuthor?: {
       url: string;
     };
-    contentFederal: string;
-    author: {
-      name: string;
-      coverImageAuthor?: {
-        url: string;
-      };
-    };
-  }[];
+  };
 }
 
-export default function Home({ federais }: AllFederais) {
+interface AllFederais {
+  federais: Federal[];
+}
+
+export default function Federais({ federais }: AllFederais) {
   return (
     <>
       <Head>
@@ -69,21 +75,20 @@ export default function Home({ federais }: AllFederais) {
           Voltar
         </Link>
         <div>
-          <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-">
+          <h1 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-10 ml-5 mb-5">
             Oportunidades Federais
           </h1>
         </div>
-
         {federais.length > 0 && (
           <Link
             href={`/federal/${federais[0].slugfederal}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
             <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
-              {federais[0].federalCoverImage ? (
+              {federais[0].federalCoverImage?.url ? (
                 <Image
                   src={federais[0].federalCoverImage.url}
-                  alt="Imagem de capa"
+                  alt={federais[0].titlefederal}
                   fill={true}
                   style={{ objectFit: "cover" }}
                 />
@@ -100,8 +105,8 @@ export default function Home({ federais }: AllFederais) {
               <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
                 {federais[0].subtitlefederal}
               </p>
-              <div>
-              {federais[0].author.coverImageAuthor?.url && (
+              <div className="flex items-center mt-3">
+                {federais[0].author.coverImageAuthor?.url && (
                   <Image
                     src={federais[0].author.coverImageAuthor.url}
                     alt={federais[0].author.name}
@@ -110,36 +115,35 @@ export default function Home({ federais }: AllFederais) {
                     className="rounded-full mr-2"
                   />
                 )}
-                <p className="font-bold text-zinc-900 text-sm md:text-base">
-                  {federais[0].author.name}
-                </p>
-                <p className="text-zinc-600 text-xs md:text-sm">
-                  {format(
-                    new Date(federais[0].createdAt),
-                    "dd 'de' MMM 'de' yyyy",
-                    { locale: ptBR }
-                  )}
-                </p>
+                <div>
+                  <p className="font-bold text-zinc-900 text-sm md:text-base">
+                    {federais[0].author.name}
+                  </p>
+                  <p className="text-zinc-600 text-xs md:text-sm">
+                    {format(
+                      new Date(federais[0].createdAt),
+                      "dd 'de' MMM 'de' yyyy",
+                      { locale: ptBR }
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </Link>
         )}
         <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
           {federais.length > 0 ? (
-            federais
-              .slice(1, 1000)
-              .map((federal) => (
-                <CardFederal
-                  key={federal.id}
-                  title={federal.titlefederal}
-                  subtitle={federal.subtitlefederal}
-                  authorImage={federal.author.coverImageAuthor?.url || ""}
-                  createdAt={federal.createdAt}
-                  urlImage={federal.federalCoverImage?.url}
-                  slug={federal.slugfederal}
-                  author={federal.author.name}
-                />
-              ))
+            federais.slice(1).map((federal) => (
+              <CardFederal
+                key={federal.id}
+                title={federal.titlefederal}
+                subtitle={federal.subtitlefederal}
+                createdAt={federal.createdAt}
+                urlImage={federal.federalCoverImage?.url || "/path/to/default/image.jpg"}
+                slug={federal.slugfederal}
+                author={federal.author.name}
+              />
+            ))
           ) : (
             <Empty />
           )}

@@ -4,11 +4,10 @@ import { client } from "@/lib/apollo";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import { Header } from "@/components/Header";
 import Head from "next/head";
 import Link from "next/link";
-import { ElementNode } from "@graphcms/rich-text-types";
 import Footer from "@/components/footer/Footer";
 import PostsList from "@/components/postabertos/PostsList";
 
@@ -28,6 +27,10 @@ const GET_FEDERAL = gql`
       }
       author {
         name
+        coverImageAuthor {
+          url
+        }
+          slugauthor
       }
       createdAt
     }
@@ -53,10 +56,14 @@ interface FederalProps {
       url: string;
     };
     contentFederal: {
-      json: ElementNode[];
+      json: any; // Ajustado para suportar a estrutura do GraphCMS
     };
     author: {
       name: string;
+      slugauthor: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
     createdAt: string;
   };
@@ -89,28 +96,49 @@ export default function Federal({ federal }: FederalProps) {
               <Image
                 src={federal.federalCoverImage.url}
                 alt={federal.titlefederal}
-                fill={true}
-                style={{ objectFit: "contain" }}
+                fill
+                style={{ objectFit: "cover" }}
               />
             </div>
           )}
         </div>
 
         <div className="flex w-full flex-col mt-4 sm:mt-8">
-          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+          <h1 className="font-bold text-center mb-5 text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
             {federal.titlefederal}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">
             {federal.subtitlefederal}
           </h2>
-          <div>
-            <p className="font-bold text-zinc-900">{federal.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(federal.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
-          </div>
+          <Link
+            href={`/sobre/${federal.author.slugauthor}`} // Usando slugauthor aqui
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
+          >
+            <div className="flex mt-5">
+              {federal.author.coverImageAuthor?.url && (
+                <Image
+                  src={federal.author.coverImageAuthor.url}
+                  alt={federal.author.name}
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
+              )}
+              <div>
+                <p className="font-bold text-zinc-900">{federal.author.name}</p>
+                <p className="text-zinc-600 text-sm">
+                  {format(
+                    new Date(federal.createdAt),
+                    "dd 'de' MMM 'de' yyyy",
+                    {
+                      locale: ptBR,
+                    }
+                  )}
+                </p>
+              </div>
+            </div>
+          </Link>
+
           <div className="mt-4 sm:mt-8">
             <RichText
               content={federal.contentFederal.json}
@@ -125,65 +153,11 @@ export default function Federal({ federal }: FederalProps) {
                     {children}
                   </h2>
                 ),
-                h3: ({ children }) => (
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
-                    {children}
-                  </h3>
-                ),
                 p: ({ children }) => (
-                  <p className="text-zinc-600 text-sm sm:text-base text-justify lg:text-left mt-1 mb-4">
+                  <p className="text-zinc-600 text-sm sm:text-base my-2">
                     {children}
                   </p>
                 ),
-                ul: ({ children }) => (
-                  <ul className="list-disc list-inside ml-4 mb-4">
-                    {children}
-                  </ul>
-                ),
-                ol: ({ children }) => (
-                  <ol className="list-decimal list-inside ml-4 mb-4">
-                    {children}
-                  </ol>
-                ),
-                li: ({ children }) => (
-                  <li className="text-zinc-600 text-sm sm:text-base">
-                    {children}
-                  </li>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4">
-                    {children}
-                  </blockquote>
-                ),
-                table: ({ children }) => (
-                  <div className="overflow-x-auto my-4">
-                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
-                      {children}
-                    </table>
-                  </div>
-                ),
-                code: ({ children }) => (
-                  <code className="bg-gray-200 rounded px-1 py-0.5">
-                    {children}
-                  </code>
-                ),
-                img: (props: Partial<ImageProps>) => {
-                  const { src, alt = "" } = props;
-                  if (!src) {
-                    return <></>;
-                  }
-                  return (
-                    <div className="my-4">
-                      <Image
-                        src={src}
-                        alt={alt}
-                        width={800}
-                        height={450}
-                        className="rounded-lg"
-                      />
-                    </div>
-                  );
-                },
               }}
             />
           </div>
@@ -195,50 +169,37 @@ export default function Federal({ federal }: FederalProps) {
   );
 }
 
-// Get Static Props: fetch data for the specific "federal"
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slugfederal;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await client.query({ query: GET_FEDERAL_SLUGS });
+  const paths = data.federais.map((federal: { slugfederal: string }) => ({
+    params: { slugfederal: federal.slugfederal },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slugFederal = params?.slugfederal as string;
 
   try {
     const { data } = await client.query({
       query: GET_FEDERAL,
-      variables: { slugFederal: slug },
+      variables: { slugFederal },
     });
 
-    if (!data || !data.federal) {
-      return { notFound: true };
-    }
-
-    console.log("Fetched data:", data);
-
     return {
-      props: { federal: data.federal },
-      revalidate: 60 * 30, // 30 minutos
+      props: {
+        federal: data.federal,
+      },
+      revalidate: 60, // Revalida a cada 60 segundos
     };
   } catch (error) {
-    console.error("Error fetching federal data:", error);
-    return { notFound: true };
-  }
-};
-
-// Get Static Paths: generate the paths for the slugs
-export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const { data } = await client.query({
-      query: GET_FEDERAL_SLUGS,
-    });
-
-    const paths =
-      data?.federais.map((federal: { slugfederal: string }) => ({
-        params: { slugfederal: federal.slugfederal },
-      })) || [];
-
+    console.error("Erro ao carregar notícia:", error);
     return {
-      paths,
-      fallback: "blocking",
+      notFound: true,
     };
-  } catch (error) {
-    console.error("Error fetching slugs:", error);
-    return { paths: [], fallback: "blocking" };
   }
 };

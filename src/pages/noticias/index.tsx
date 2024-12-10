@@ -105,6 +105,7 @@ export default function NoticiasPage({ noticias }: AllNoticias) {
               <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
                 {noticias[0].subtitlenoticia}
               </p>
+
               <div>
                 {noticias[0].author.coverImageAuthor?.url && (
                   <Image

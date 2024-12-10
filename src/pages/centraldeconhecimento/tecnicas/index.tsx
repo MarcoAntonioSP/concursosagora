@@ -18,6 +18,7 @@ const GET_ALL_TECNICAS = gql`
       id
       slugtecnica
       titletecnica
+      subtitletecnica
       createdAt
       tecnicaCoverImage {
         url
@@ -36,6 +37,7 @@ interface AllTecnicas {
   tecnicas: {
     id: string;
     slugtecnica: string;
+    subtitletecnica: string;
     titletecnica: string;
     createdAt: string;
     tecnicaCoverImage: {
@@ -139,7 +141,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
                 {tecnicas[0].titletecnica}
               </h1>
               <p className="text-zinc-600 text-sm md:text-base text-justify lg:text-left line-clamp-3">
-                {tecnicas[0].slugtecnica}
+                {tecnicas[0].subtitletecnica}
               </p>
               <div className="flex items-center gap-2">
                 {tecnicas[0].author.coverImageAuthor?.url && (

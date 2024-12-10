@@ -55,15 +55,6 @@ export function CardEmprego({
           {subtitle}
         </p>
         <div className="w-full flex items-center mt-2 gap-2">
-          {authorImage && (
-            <Image
-              src={authorImage}
-              alt={`Foto do autor ${author}`}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          )}
           <div>
             <p className="font-bold text-zinc-900 text-sm md:text-base">
               {author}

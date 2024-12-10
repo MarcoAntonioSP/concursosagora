@@ -28,6 +28,9 @@ const GET_PREVISTO = gql`
         text
       }
       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
       createdAt
@@ -59,6 +62,9 @@ interface PrevistoProps {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
     createdAt: string;
   };
@@ -83,7 +89,7 @@ export default function Previsto({ previsto }: PrevistoProps) {
       <div className="w-full max-w-[1120px] flex flex-col mx-auto pb-12 px-4">
         <Link
           href="/"
-          className="flex w-full max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
+          className="flex w-full mt-20 max-w-fit font-bold text-zinc-900 hover:text-zinc-600"
         >
           Voltar
         </Link>
@@ -100,22 +106,39 @@ export default function Previsto({ previsto }: PrevistoProps) {
             </div>
           )}
         </div>
-
-        <div className="flex w-full flex-col mt-4 sm:mt-8">
-          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+        <h1 className="font-bold text-2xl text-center mt-8 mb-5 sm:text-4xl lg:text-[40px] text-blue-600">
             {previsto.titleprevisto}
           </h1>
           <h2 className="mt-4 text-xl text-zinc-800">
             {previsto.subtitleprevisto}
           </h2>
-          <div>
-            <p className="font-bold text-zinc-900">{previsto.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(previsto.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
-          </div>
+        <div className="flex w-full flex-col mt-4 sm:mt-8">
+        <Link href="/" aria-label="link para perfil do autor">
+            <div className="flex mt-5">
+              {previsto.author.coverImageAuthor?.url && (
+                <Image
+                  src={previsto.author.coverImageAuthor.url}
+                  alt={previsto.author.name}
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
+              )}
+              <div>
+                <p className="font-bold text-zinc-900">{previsto.author.name}</p>
+                <p className="text-zinc-600 text-sm">
+                  {format(
+                    new Date(previsto.createdAt),
+                    "dd 'de' MMM 'de' yyyy",
+                    {
+                      locale: ptBR,
+                    }
+                  )}
+                </p>
+              </div>
+            </div>
+          </Link>
+
           <div className="mt-4 sm:mt-8">
             <RichText
               content={previsto.contentPrevisto.json}

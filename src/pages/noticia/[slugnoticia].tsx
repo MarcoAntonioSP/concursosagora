@@ -26,7 +26,10 @@ const GET_NOTICIA = gql`
       contentNoticia {
         json
       }
-      author {
+       author {
+        coverImageAuthor {
+          url
+        }
         name
       }
       createdAt
@@ -57,6 +60,9 @@ interface NoticiaProps {
     };
     author: {
       name: string;
+      coverImageAuthor?: {
+        url: string;
+      };
     };
     createdAt: string;
   };
@@ -102,14 +108,27 @@ export default function Noticia({ noticia }: NoticiaProps) {
           <h2 className="mt-4 text-xl text-zinc-800">
             {noticia.subtitlenoticia}
           </h2>
-          <div>
-            <p className="font-bold text-zinc-900">{noticia.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(noticia.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
+
+          <div className="flex mt-5">
+            {noticia.author.coverImageAuthor?.url && (
+              <Image
+                src={noticia.author.coverImageAuthor.url}
+                alt={noticia.author.name}
+                width={50}
+                height={50}
+                className="rounded-full mr-2"
+              />
+            )}
+            <div>
+              <p className="font-bold text-zinc-900">{noticia.author.name}</p>
+              <p className="text-zinc-600 text-sm">
+                {format(new Date(noticia.createdAt), "dd 'de' MMM 'de' yyyy", {
+                  locale: ptBR,
+                })}
+              </p>
+            </div>
           </div>
+          
           <div className="mt-4 sm:mt-8">
             <RichText
               content={noticia.contentNoticia.json}

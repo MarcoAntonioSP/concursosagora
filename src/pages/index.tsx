@@ -292,7 +292,8 @@ export default function Home({
             <Link
               href={`/aberto/${posts[0].slug}`}
               className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-1 hover:brightness-75 transition-all"
-             style={{marginTop: '-40px'}}>
+              style={{ marginTop: "-40px" }}
+            >
               <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
                 <Image
                   src={posts[0].coverImage.url}
@@ -310,18 +311,6 @@ export default function Home({
                   {posts[0].subtitle}
                 </p>
                 <div className="flex items-center gap-2">
-                  {/* Foto do autor */}
-                  {posts[0].author.coverImageAuthor?.url && (
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
-                      <Image
-                        src={posts[0].author.coverImageAuthor.url}
-                        alt={posts[0].author.name}
-                        width={40}
-                        height={40}
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
                   <div>
                     <p className="font-bold text-zinc-900 text-sm md:text-base">
                       {posts[0].author.name}
@@ -350,7 +339,6 @@ export default function Home({
                   key={post.id}
                   title={post.title}
                   author={post.author.name}
-                  authorImage={post.author.coverImageAuthor?.url || ""}
                   createdAt={post.createdAt}
                   subtitle={post.subtitle}
                   urlImage={post.coverImage.url}
@@ -358,7 +346,6 @@ export default function Home({
                 />
               ))}
             </div>
-            import Link from 'next/link';
             <div>
               <Link href="/previstos">
                 <h2 className="text-red-900 text-xl font-bold font-sans italic text-shadow-md mt-5 ml-5 animate-shake animate-infinite animate-duration-[2000ms] animate-ease-linear animate-normal animate-fill-both">
@@ -400,7 +387,6 @@ export default function Home({
     </>
   );
 }
-
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: postsData } = await client.query({ query: GET_ALL_POSTS });
   const { data: previstosData } = await client.query({
@@ -415,7 +401,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data: federaisData } = await client.query({
     query: GET_ALL_FEDERAIS,
   });
-
   return {
     props: {
       posts: postsData.posts,
