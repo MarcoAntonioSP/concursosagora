@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import Head from "next/head";
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
+import PostsList from "@/components/postabertos/PostsList";
 
 // Query para obter os dados da técnica por slug
 const GET_TECNICA = gql`
@@ -182,6 +183,7 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
           </div>
         </div>
       </div>
+      <PostsList />
       <Footer />
     </>
   );

@@ -10,6 +10,7 @@ import { GetServerSideProps } from "next";
 import { client } from "@/lib/apollo";
 import Empty from "@/components/Empty";
 import { CardTecnicas } from "@/components/tecnicas/CardTecnicas";
+import PostsList from "@/components/postabertos/PostsList";
 
 // Consulta GraphQL ajustada para seu caso
 const GET_ALL_TECNICAS = gql`
@@ -183,7 +184,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
           )}
         </div>
       </div>
-
+      <PostsList />
       <Footer />
     </>
   );
