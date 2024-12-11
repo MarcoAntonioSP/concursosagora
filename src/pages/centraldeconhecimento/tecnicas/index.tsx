@@ -119,7 +119,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
 
         {tecnicas.length > 0 && (
           <Link
-            href={`/centraldeconhecimento/tecnica/${tecnicas[0].slugtecnica}`}
+            href={`/centraldeconhecimento/tecnicasdeestudo/${tecnicas[0].slugtecnica}`}
             className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-center mt-12 hover:brightness-75 transition-all"
           >
             <div className="flex flex-1 w-full h-full min-h-[240px] md:min-h-[334px] relative overflow-hidden">
@@ -172,7 +172,7 @@ export default function Home({ tecnicas }: AllTecnicas) {
                 key={tecnica.id}
                 title={tecnica.titletecnica}
                 subtitle={tecnica.slugtecnica}
-                authorImage={tecnica.author.coverImageAuthor?.url || ""}
+                authorImage={tecnica.author.coverImageAuthor?.url || "/path/to/default/image.jpg"}
                 createdAt={tecnica.createdAt}
                 urlImage={tecnica.tecnicaCoverImage?.url}
                 slug={tecnica.slugtecnica}

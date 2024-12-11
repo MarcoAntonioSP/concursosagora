@@ -31,7 +31,7 @@ export function CardTecnicas({
 
   return (
     <Link
-      href={`/tecnicas/${slug}`}
+      href={`/centraldeconhecimento/tecnicasdeestudo/${slug}`}
       className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
         hover:brightness-75 transition-opacity duration-500 ${
           isVisible ? "opacity-100 animate__animated animate__zoomInDown" : "opacity-0"
