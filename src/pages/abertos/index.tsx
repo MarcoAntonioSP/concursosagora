@@ -90,7 +90,7 @@ interface AllPrevistos {
 
 export default function Abertos({ posts, previstos }: AllPosts & AllPrevistos) {
   const sortedPrevistos = previstos
-    .slice(4, 0)
+    .slice(0, 4)
     .sort(
       (a, b) =>
         new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
