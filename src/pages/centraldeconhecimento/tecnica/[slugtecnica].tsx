@@ -92,7 +92,7 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
               <Image
                 src={tecnica.tecnicaCoverImage.url}
                 alt={tecnica.titletecnica}
-                fill={true}
+                fill
                 style={{ objectFit: "cover" }}
               />
             </div>
@@ -100,17 +100,33 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
         </div>
 
         <div className="flex w-full flex-col mt-4 sm:mt-8">
-          <h1 className="font-bold text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
+          <h1 className="font-bold text-center mb-5 text-2xl sm:text-4xl lg:text-[40px] text-blue-600">
             {tecnica.titletecnica}
           </h1>
-          <div>
-            <p className="font-bold text-zinc-900">{tecnica.author.name}</p>
-            <p className="text-zinc-600 text-sm">
-              {format(new Date(tecnica.createdAt), "dd 'de' MMM 'de' yyyy", {
-                locale: ptBR,
-              })}
-            </p>
-          </div>
+          <Link
+            href={`/autores/${tecnica.author.name}`} // Usando o nome do autor
+            className="w-full h-full flex gap-4 lg:gap-8 flex-col sm:flex-row items-center justify-start mt-12 hover:brightness-75 transition-all"
+          >
+            <div className="flex mt-5">
+              {tecnica.author.coverImageAuthor?.url && (
+                <Image
+                  src={tecnica.author.coverImageAuthor.url}
+                  alt={tecnica.author.name}
+                  width={50}
+                  height={50}
+                  className="rounded-full mr-2"
+                />
+              )}
+              <div>
+                <p className="font-bold text-zinc-900">{tecnica.author.name}</p>
+                <p className="text-zinc-600 text-sm">
+                  {format(new Date(tecnica.createdAt), "dd 'de' MMM 'de' yyyy", {
+                    locale: ptBR,
+                  })}
+                </p>
+              </div>
+            </div>
+          </Link>
 
           <div className="mt-4 sm:mt-8">
             <RichText
@@ -127,7 +143,7 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-400 my-4">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500 my-4">
                     {children}
                   </h3>
                 ),
@@ -156,6 +172,13 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
                     {children}
                   </blockquote>
                 ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-4">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+                      {children}
+                    </table>
+                  </div>
+                ),
                 code: ({ children }) => (
                   <code className="bg-gray-200 rounded px-1 py-0.5">
                     {children}
@@ -164,7 +187,7 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
                 img: (props: Partial<ImageProps>) => {
                   const { src, alt = "" } = props;
                   if (!src) {
-                    return <></>; // Retorna um fragmento vazio
+                    return <></>;
                   }
                   return (
                     <div className="my-4">
@@ -189,48 +212,37 @@ export default function Tecnica({ tecnica }: TecnicaProps) {
   );
 }
 
-// Get Static Props: fetch data for the specific "tecnica"
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slugtecnica;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await client.query({ query: GET_TECNICAS_SLUGS });
+  const paths = data.tecnicas.map((tecnica: { slugtecnica: string }) => ({
+    params: { slugtecnica: tecnica.slugtecnica },
+  }));
 
-  try {
-    const { data } = await client.query({
-      query: GET_TECNICA,
-      variables: { slugTecnica: slug },
-    });
-
-    if (!data || !data.tecnica) {
-      return { notFound: true };
-    }
-
-    return {
-      props: { tecnica: data.tecnica },
-      revalidate: 60 * 30, // 30 minutos
-    };
-  } catch (error) {
-    console.error("Error fetching tecnica data:", error);
-    return { notFound: true };
-  }
+  return {
+    paths,
+    fallback: "blocking",
+  };
 };
 
-// Get Static Paths: generate the paths for the slugs
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slugTecnica = params?.slugtecnica as string;
+
   try {
     const { data } = await client.query({
       query: GET_TECNICA,
+      variables: { slugTecnica },
     });
 
-    const paths =
-      data?.tecnicas.map((tecnica: { slugtecnica: string }) => ({
-        params: { slugtecnica: tecnica.slugtecnica },
-      })) || [];
-
     return {
-      paths,
-      fallback: "blocking",
+      props: {
+        tecnica: data.tecnica,
+      },
+      revalidate: 60, // Revalida a cada 60 segundos
     };
   } catch (error) {
-    console.error("Error fetching slugs:", error);
-    return { paths: [], fallback: "blocking" };
+    console.error("Erro ao carregar técnica:", error);
+    return {
+      notFound: true,
+    };
   }
 };
