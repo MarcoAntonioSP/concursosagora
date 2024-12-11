@@ -13,71 +13,72 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
-// Defina a função gtag fora do useEffect
-const gtag = (...args: any[]) => {
-  window.dataLayer.push(args);
-};
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   const [consentGiven, setConsentGiven] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = gtag;
-
-      window.gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'wait_for_update': 500,
-        'region': ['ES', 'US-AK'],
-      });
-
-      const consentStatus = localStorage.getItem('cookie-consent');
-      if (consentStatus === 'true') {
-        setConsentGiven(true);
-        consentGrantedAdStorage();
-      } else {
-        setConsentGiven(false);
-        setDefaultConsentState();
-      }
+    // Verifica o estado do consentimento no LocalStorage ao carregar
+    const consent = localStorage.getItem('cookie-consent');
+    if (consent !== null) {
+      setConsentGiven(consent === 'true');
+    } else {
+      setConsentGiven(null);
     }
   }, []);
 
+  useEffect(() => {
+    if (consentGiven) {
+      // Adiciona o script do GTM
+      const script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XTE88KS83H';
+      script.async = true;
+      document.body.appendChild(script);
+
+      // Inicializa o dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function (...args: any[]) {
+        window.dataLayer.push(args);
+      };
+
+      // Configura o GTM
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-XTE88KS83H');
+    }
+  }, [consentGiven]);
+
   const handleConsent = (consent: boolean) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('cookie-consent', String(consent));
-      setConsentGiven(consent);
-      if (consent) {
-        consentGrantedAdStorage();
-      }
+    localStorage.setItem('cookie-consent', String(consent));
+    setConsentGiven(consent);
+    if (consent) {
+      grantConsent();
     }
   };
 
-  const consentGrantedAdStorage = () => {
-    if (typeof window !== 'undefined') {
-      window.gtag('consent', 'update', {
-        'ad_storage': 'granted',
-        'analytics_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-      });
-    }
+  const grantConsent = () => {
+    window.gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+    });
   };
 
   const setDefaultConsentState = () => {
-    if (typeof window !== 'undefined') {
-      window.gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'wait_for_update': 500,
-        'region': ['ES', 'US-AK'],
-      });
-    }
+    window.gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500,
+      region: ['ES', 'US-AK'],
+    });
   };
 
   return (
@@ -85,27 +86,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={`${poppins.variable} font-sans`}>
         <SpeedInsights />
 
-        {consentGiven !== null && consentGiven && (
-          <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-XTE88KS83H"
-            ></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-XTE88KS83H');
-                `,
-              }}
-            />
-          </>
-        )}
-
         <Component {...pageProps} />
-        {consentGiven !== null && !consentGiven && <CookieBanner onConsent={handleConsent} />}
+        {consentGiven === null && <CookieBanner onConsent={handleConsent} />}
       </main>
     </ApolloProvider>
   );

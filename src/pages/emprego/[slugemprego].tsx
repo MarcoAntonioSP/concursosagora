@@ -218,30 +218,31 @@ export default function Emprego({ emprego }: EmpregoProps) {
 }
 
 // Get Static Props: fetch data for the specific "emprego"
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const slug = ctx.params?.slugemprego;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slugEmprego = params?.slugemprego as string;
 
   try {
     const { data } = await client.query({
       query: GET_EMPREGOS,
-      variables: { slugEmprego: slug },
+      variables: { slugEmprego },
     });
 
-    if (!data || !data.emprego) {
-      return { notFound: true };
-    }
-
-    console.log("Fetched data:", data);
+    console.log("Dados retornados:", data); // Debug aqui
 
     return {
-      props: { emprego: data.emprego },
-      revalidate: 60 * 30, // 30 minutos
+      props: {
+        emprego: data.emprego,
+      },
+      revalidate: 60,
     };
   } catch (error) {
-    console.error("Error fetching emprego data:", error);
-    return { notFound: true };
+    console.error("Erro ao carregar emprego:", error);
+    return {
+      notFound: true,
+    };
   }
 };
+
 
 // Get Static Paths: generate the paths for the slugs
 export const getStaticPaths: GetStaticPaths = async () => {
