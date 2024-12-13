@@ -273,11 +273,11 @@ export default function Home({
         <Header />
         {posts ? (
           <>
-            {/* Quero exibir somente o titulo  */}
+            {/* Para exibir somente o titulo  */}
             {noticias.length > 0 && (
               <Link
                 href={`/noticia/${noticias[0].slugnoticia}`}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full h-full p-4 sm:p-6 mt-12 hover:brightness-75 transition-all"
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full h-full p-4 sm:p-6 mt-12 mb-4 hover:brightness-75 transition-all"
               >
                 <div className="flex flex-1 flex-col gap-3 lg:gap-6 text-center sm:text-left">
                   <h1 className="font-bold text-xl text sm:text-2xl md:text-3xl lg:text-4xl text-blue-600 line-clamp-2">
