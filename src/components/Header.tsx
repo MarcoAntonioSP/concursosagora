@@ -54,13 +54,13 @@ export function Header() {
             <button
               type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 mt-6 font-extrabold border w-12 h-12 justify-center text-sm text-gray-800 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               <span className="sr-only">{menuOpen ? "Close" : "Open"} main menu</span>
               {menuOpen ? (
-                <XIcon className="w-5 h-5" />
+                <XIcon className="w-44 h-44" />
               ) : (
-                <MenuIcon className="w-5 h-5" />
+                <MenuIcon className="w-44 h-44" />
               )}
             </button>
           </div>
