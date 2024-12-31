@@ -21,6 +21,7 @@ const GET_POST = gql`
       subtitle
       coverImage {
         url
+        fileName
       }
       content {
         json
@@ -51,6 +52,7 @@ interface PostProps {
     subtitle: string;
     coverImage?: {
       url: string;
+      fileName: string;
     };
     content: {
       json: ElementNode[];
@@ -97,16 +99,19 @@ export default function Post({ post }: PostProps) {
         </Link>
 
         <div className="w-full h-full flex flex-col mt-8">
-          {post.coverImage && post.coverImage.url && (
-            <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
-              <Image
-                src={post.coverImage.url}
-                alt={post.title}
-                fill={true}
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          )}
+          {post.coverImage &&
+            post.coverImage.url &&
+            post.coverImage.fileName && (
+              <div className="flex w-full h-56 sm:h-80 lg:h-[392px] relative overflow-hidden">
+                <Image
+                  src={post.coverImage.url}
+                  alt={post.title}
+                  fill={true}
+                  style={{ objectFit: "cover" }}
+                  title={post.coverImage.fileName}
+                />
+              </div>
+            )}
         </div>
         <div className="flex w-full flex-col sm:mt-2">
           <h1 className="font-bold text-2xl text-center mb-5 sm:text-4xl lg:text-[40px] text-blue-600">

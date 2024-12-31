@@ -32,7 +32,7 @@ export function CardPost({
   return (
     <div
       className={`w-full sm:max-w-[352px] h-full flex flex-col items-center justify-between gap-2 sm:gap-4 
-        transition-opacity duration-500 ${
+        transition-opacity duration-300 ${
           isVisible ? "opacity-100 animate__animated animate__zoomInDown" : "opacity-0"
         }`}
       ref={ref as any}

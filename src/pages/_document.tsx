@@ -9,7 +9,6 @@ export default function Document() {
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
 
-        {/* Google Analytics */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-XTE88KS83H`}></script>
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -21,7 +20,9 @@ export default function Document() {
             });
           `,
         }} />
-
+ 
+      </Head>
+      <body className="bg-gray-50">
         {/* Google Tag Manager */}
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -32,14 +33,10 @@ export default function Document() {
             })(window,document,'script','dataLayer','GTM-58T4PGJL');
           `,
         }} />
-      </Head>
-      <body className="bg-gray-50">
-        {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58T4PGJL"
             height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
         <Main />
         <NextScript />
       </body>
