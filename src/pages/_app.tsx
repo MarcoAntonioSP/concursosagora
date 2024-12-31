@@ -1,3 +1,4 @@
+// pages/_app.tsx
 import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
@@ -5,7 +6,7 @@ import { client } from '@/lib/apollo';
 import '../styles/globals.css';
 import CookieBanner from '@/components/cookiebanner/CookieBanner';
 import { Poppins } from 'next/font/google';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import GoogleAnalytics from '@/components/cookiebanner/GoogleAnalytics';  // Importe o novo componente
 
 const poppins = Poppins({
   weight: ['400', '700'],
@@ -23,41 +24,17 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, []);
 
-  useEffect(() => {
-    if (consentGiven) {
-      // Adiciona o script do GTM
-      const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
-      script.async = true;
-      document.body.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function (...args) {
-        window.dataLayer.push(args);
-      };
-
-      window.gtag('js', new Date());
-      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID);
-    }
-  }, [consentGiven]);
-
   const handleConsent = (consent: boolean) => {
     localStorage.setItem('cookie-consent', String(consent));
     setConsentGiven(consent);
-    if (consent) {
-      window.gtag('consent', 'update', {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-      });
-    }
   };
 
   return (
     <ApolloProvider client={client}>
       <main className={`${poppins.variable} font-sans`}>
-        <SpeedInsights />
+        {/* Carrega o GoogleAnalytics somente após o consentimento */}
+        {consentGiven && <GoogleAnalytics />}
+
         <Component {...pageProps} />
         {consentGiven === null && <CookieBanner onConsent={handleConsent} />}
       </main>
