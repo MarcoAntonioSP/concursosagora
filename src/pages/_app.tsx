@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
     if (consentGiven) {
       // Adiciona o script do GTM
       const script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XTE88KS83H';
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
       script.async = true;
       document.body.appendChild(script);
 
@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
       };
 
       window.gtag('js', new Date());
-      window.gtag('config', 'G-XTE88KS83H');
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID);
     }
   }, [consentGiven]);
 

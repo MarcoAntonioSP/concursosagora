@@ -8,7 +8,7 @@ interface IntersectionObserverArgs {
 }
 
 function useIntersectionObserver({
-  threshold = 0.2,  // Ajustado para 20%
+  threshold = 0.5,
   root = null,
   rootMargin = "0px",
   triggerOnce = true,
